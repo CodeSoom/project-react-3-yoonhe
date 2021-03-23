@@ -4,7 +4,8 @@
   "description": "Room reviews",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
