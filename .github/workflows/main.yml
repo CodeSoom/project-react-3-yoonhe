@@ -8,11 +8,20 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout source code.   
+      - name: Checkout source code.  
         uses: actions/checkout@master
 
-      - name: Install Dependencies    
+      - name: Cache node modules   
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build                   
+      - name: Build               
         run: npm run build
