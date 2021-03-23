@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <p>Hello, Room View</p>
-    </div>
+    <BrowserRouter basename="/project-react-3-yoonhe">
+      <div>
+        <p>Hello, Room View</p>
+      </div>
+    </BrowserRouter>
   );
 }
 
