@@ -5,7 +5,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/index.jsx'),
-  mode: 'development',
+  output: {
+    path: path.resolve(__dirname, 'dist/'),
+    filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -15,27 +21,17 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist/'),
-    publicPath: '/dist/',
-    filename: 'bundle.js',
-  },
+  mode: 'development',
   devServer: {
-    historyApiFallback: {
-      index: 'index.html',
-    },
-    contentBase: path.join(__dirname, 'public/'),
     port: 3000,
+    contentBase: path.join(__dirname, 'public/'),
     publicPath: 'http://localhost:3000/dist/',
     hotOnly: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: path.resolve(__dirname, 'public/index.html'),
     }),
     new CleanWebpackPlugin(),
   ],
