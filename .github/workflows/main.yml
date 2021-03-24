@@ -23,7 +23,7 @@ jobs:
         run: npm install --prod --pure-lockfile
 
       - name: Build
-        run: npm run build
+        run: npm run deploy
         env:
           NODE_ENV: production
       - name: Deploy
