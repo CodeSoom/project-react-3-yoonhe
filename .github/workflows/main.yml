@@ -7,9 +7,9 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@develop
+      - uses: actions/checkout@master
       - name: Set up Node.js
-        uses: actions/setup-node@develop
+        uses: actions/setup-node@master
         with:
           node-version: 12.x
       - name: Cache node_modules
