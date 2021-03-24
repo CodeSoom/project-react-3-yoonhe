@@ -18,5 +18,5 @@
 - 집 랭킹
 - 부동산 랭킹(세입자들이 부동산의 신뢰도 또는 양심도를 직접 평가합니다)
 
-<img src="./public/main.png" width="500" />
+<img src="./public/main.png" width="100%" />
 
