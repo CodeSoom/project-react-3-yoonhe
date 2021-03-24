@@ -4,7 +4,7 @@ import ReactDom from 'react-dom';
 function App() {
   return (
     <div>
-      <p>Hello, Room View !!! test test</p>
+      <p>룸프리뷰 !</p>
     </div>
   );
 }
