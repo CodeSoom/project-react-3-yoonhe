@@ -7,9 +7,9 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@develop
       - name: Set up Node.js
-        uses: actions/setup-node@master
+        uses: actions/setup-node@develop
         with:
           node-version: 12.x
       - name: Cache node_modules
@@ -23,13 +23,13 @@ jobs:
         run: npm install --prod --pure-lockfile
 
       - name: Build
-        run: npm run deploy
+        run: npm run build
         env:
           NODE_ENV: production
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v2.5.0
         env:
           PERSONAL_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          PUBLISH_BRANCH: gh-pages
+          PUBLISH_BRANCH: master
           PUBLISH_DIR: ./public
           SCRIPT_MODE: true
