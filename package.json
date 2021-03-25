@@ -4,10 +4,8 @@
   "description": "Room reviews",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --progress & open http://localhost:3000/",
-    "build": "webpack --progress",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "webpack-dev-server --progress & open http://localhost:7777/",
+    "build": "webpack --progress"
   },
   "repository": {
     "type": "git",
@@ -18,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/yoonhe/project-react-3-yoonhe/issues"
   },
-  "homepage": "https://yoonhe.github.io/project-react-3-yoonhe/",
+  "homepage": "https://yoonhe.github.io/project-react-3-yoonhe",
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.12",
