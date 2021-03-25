@@ -20,10 +20,10 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-build-${{ runner.OS }}-
       - name: Install dependencies
-        run: npm install --prod --pure-lockfile
+        run: yarn install --prod --pure-lockfile
 
       - name: Build
-        run: npm run build
+        run: yarn run build
         env:
           NODE_ENV: production
       - name: Deploy
