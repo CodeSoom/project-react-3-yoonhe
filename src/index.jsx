@@ -4,12 +4,13 @@ import ReactDom from 'react-dom';
 function App() {
   return (
     <div>
-      <p>Hello, Room View</p>
+      <p>룸프리뷰 !</p>
+      <p>더이상 속지마세요! 직접 보고 결정하세요</p>
     </div>
   );
 }
 
 ReactDom.render(
   <App />,
-  document.getElementById('app'),
+  document.getElementById('root'),
 );
