@@ -4,6 +4,8 @@
   "description": "Room reviews",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "webpack-dev-server --progress & open http://localhost:7777/",
     "build": "webpack --progress"
   },
