@@ -27,6 +27,7 @@ module.exports = {
   devServer: {
     port: 7777,
     contentBase: path.join(__dirname, 'public/'),
+    historyApiFallback: true,
   },
   plugins: [
     new DotEnv(),
