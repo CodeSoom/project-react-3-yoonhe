@@ -1,3 +1,5 @@
+const DotEnv = require('dotenv-webpack');
+
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -27,6 +29,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'public/'),
   },
   plugins: [
+    new DotEnv(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
