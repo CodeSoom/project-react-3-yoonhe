@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
 import store from './store';
 
-console.log('process.env.PUBLIC_URL ? ', process.env.PUBLIC_URL);
+console.log('process.env.PUBLIC_URL ? ', process.env.NODE_ENV);
 
 ReactDom.render(
   <Provider store={store}>
