@@ -6,9 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
 import store from './store';
 
+console.log('process.env.PUBLIC_URL ? ', process.env.PUBLIC_URL);
+
 ReactDom.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <App />
     </BrowserRouter>
   </Provider>,
