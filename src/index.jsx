@@ -8,9 +8,11 @@ import store from './store';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+console.log('1');
+
 ReactDom.render(
   <Provider store={store}>
-    <BrowserRouter basename={isProduction ? 'https://codesoom.github.io/project-react-3-yoonhe/' : '/'}>
+    <BrowserRouter basename={isProduction ? '/project-react-3-yoonhe' : '/'}>
       <App />
     </BrowserRouter>
   </Provider>,
