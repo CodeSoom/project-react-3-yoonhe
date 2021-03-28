@@ -6,9 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
 import store from './store';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 ReactDom.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename={isProduction ? 'https://codesoom.github.io/project-react-3-yoonhe/' : '/'}>
       <App />
     </BrowserRouter>
   </Provider>,
