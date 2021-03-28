@@ -5,7 +5,7 @@ import SignInPage from '../pages/SignInPage';
 
 export default function App() {
   return (
-    <div>
+    <>
       <Switch>
         <Route exact path="/">
           <SignInPage />
@@ -17,6 +17,6 @@ export default function App() {
           <div>회원가입</div>
         </Route>
       </Switch>
-    </div>
+    </>
   );
 }
