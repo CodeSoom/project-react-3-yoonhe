@@ -4,6 +4,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import SignIn from './SignIn';
 
+import { email as EMAIL, password as PASSWORD } from '../../fixtures/loginFields';
+
 describe('SignIn', () => {
   beforeEach(() => {
     jest.resetAllMocks();
@@ -13,12 +15,17 @@ describe('SignIn', () => {
   const handleSubmit = jest.fn();
   const handleClick = jest.fn();
 
-  function renderSignIn(fields = { email: '', password: '' }) {
+  function renderSignIn({ email, password, loginError } = {
+    email: '',
+    password: '',
+    loginError: null,
+  }) {
     return render(<SignIn
+      fields={{ email, password }}
+      loginError={loginError}
       onChange={handleChange}
       onSubmit={handleSubmit}
       onClick={handleClick}
-      fields={fields}
     />);
   }
 
@@ -29,8 +36,8 @@ describe('SignIn', () => {
   });
 
   it('renders input controls', () => {
-    const email = 'test@gmail.com';
-    const password = '1234';
+    const email = EMAIL;
+    const password = PASSWORD;
 
     const { getByPlaceholderText } = renderSignIn({ email, password });
 
@@ -53,8 +60,8 @@ describe('SignIn', () => {
   });
 
   it('calls onChange handler when change login feilds', () => {
-    const email = 'test@gmail.com';
-    const password = '1234';
+    const email = EMAIL;
+    const password = PASSWORD;
 
     const { getByPlaceholderText } = renderSignIn();
 
@@ -83,6 +90,12 @@ describe('SignIn', () => {
         value,
       });
     });
+  });
+
+  it('renders login error message when login fail', () => {
+    const { queryByText } = renderSignIn({ loginError: 'LOGIN_ERROR_MESSAGE' });
+
+    expect(queryByText('LOGIN_ERROR_MESSAGE')).not.toBeNull();
   });
 
   it('renders "방보러 가볼까요?" button', () => {
