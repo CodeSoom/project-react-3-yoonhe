@@ -4,21 +4,27 @@ import { render } from '@testing-library/react';
 
 import { MemoryRouter } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
+import { email as EMAIL, password as PASSWORD } from '../../fixtures/loginFields';
+
 jest.mock('react-redux');
+jest.mock('../service/api');
 
 describe('App', () => {
+  const dispatch = jest.fn();
+
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email: 'test@gmail.com',
-        password: '1234',
+        email: EMAIL,
+        password: PASSWORD,
       },
       isLoggedIn: false,
     }));
+    useDispatch.mockImplementation(() => dispatch);
   });
 
   function renderApp({ path = '/' } = {}) {

@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import SignIn from '../components/SignIn';
-import { changeLoginFields } from '../slice';
+import {
+  authenticationChange,
+  changeLoginFields,
+  loginRequest,
+} from '../slice';
 
-export default function SignInContainer({ onClick }) {
+export default function SignInContainer({ onGoToMainClick }) {
   const dispatch = useDispatch();
+  // const history = useHistory();
 
   const loginFields = useSelector((store) => store.loginFields);
+  const loginError = useSelector((store) => store.loginError);
 
-  function handleSubmit() {}
+  useEffect(() => {
+    dispatch(authenticationChange());
+  }, []);
+
+  function handleSubmit() {
+    dispatch(loginRequest(loginFields));
+  }
 
   function handleChange({ name, value }) {
     dispatch(changeLoginFields({ name, value }));
@@ -19,8 +32,9 @@ export default function SignInContainer({ onClick }) {
     <SignIn
       onChange={handleChange}
       onSubmit={handleSubmit}
-      onClick={onClick}
+      onClick={onGoToMainClick}
       fields={loginFields}
+      loginError={loginError}
     />
   );
 }

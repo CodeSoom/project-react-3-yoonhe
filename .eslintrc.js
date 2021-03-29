@@ -8,6 +8,10 @@ module.exports = {
     'plugin:react/recommended',
     'airbnb',
   ],
+  globals: {
+    context: 'readonly',
+    given: 'readonly',
+  },
   parserOptions: {
     ecmaFeatures: {
       jsx: true,

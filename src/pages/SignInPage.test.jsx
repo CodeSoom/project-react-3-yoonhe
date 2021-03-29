@@ -1,13 +1,16 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { MemoryRouter } from 'react-router-dom';
 
 import SignInPage from './SignInPage';
 
+import { email as EMAIL } from '../../fixtures/loginFields';
+
 jest.mock('react-redux');
+jest.mock('../service/api');
 
 const mockPush = jest.fn();
 
@@ -19,13 +22,16 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('SignInPage', () => {
+  const dispatch = jest.fn();
+
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
-        email: 'test@gmail.com',
+        email: EMAIL,
         password: '1234',
       },
     }));
+    useDispatch.mockImplementation(() => dispatch);
   });
 
   it('renders SignInPage', () => {
