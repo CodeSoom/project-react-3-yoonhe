@@ -7,7 +7,7 @@ import SignInContainer from '../container/SignInContainer';
 export default function SignInPage() {
   const history = useHistory();
 
-  function handleSignInClick() {
+  function handleSignUpClick() {
     history.push('/signup');
   }
 
@@ -17,8 +17,8 @@ export default function SignInPage() {
 
   return (
     <>
-      <Intro onClick={handleSignInClick} />
-      <SignInContainer onClick={handleGoToMainClick} />
+      <Intro onClick={handleSignUpClick} />
+      <SignInContainer onGoToMainClick={handleGoToMainClick} />
     </>
   );
 }
