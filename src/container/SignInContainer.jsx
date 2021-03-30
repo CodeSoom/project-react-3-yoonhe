@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 
 import SignIn from '../components/SignIn';
 import {
@@ -11,14 +10,22 @@ import {
 
 export default function SignInContainer({ onGoToMainClick }) {
   const dispatch = useDispatch();
-  // const history = useHistory();
 
+  const isLoggedIn = useSelector((store) => store.isLoggedIn);
   const loginFields = useSelector((store) => store.loginFields);
   const loginError = useSelector((store) => store.loginError);
+
+  console.log('loginError ? ', loginError);
 
   useEffect(() => {
     dispatch(authenticationChange());
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      onGoToMainClick();
+    }
+  }, [isLoggedIn]);
 
   function handleSubmit() {
     dispatch(loginRequest(loginFields));

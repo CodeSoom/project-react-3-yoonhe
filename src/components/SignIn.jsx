@@ -37,7 +37,7 @@ export default function SignIn({
             value={password}
             onChange={handleChange}
           />
-          {loginError && <p>{loginError}</p>}
+          {loginError && <p>{loginError}</p> }
           <button type="submit">방보러 가볼까요? 👉🏻</button>
         </form>
         <button type="button" onClick={onClick}>로그인 없이 구경하기 👀</button>
