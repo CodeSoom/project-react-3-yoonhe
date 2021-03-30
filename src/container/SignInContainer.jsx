@@ -2,20 +2,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SignIn from '../components/SignIn';
+
 import {
   authenticationChange,
   changeLoginFields,
   loginRequest,
 } from '../slice';
 
+import { get } from '../utils';
+
 export default function SignInContainer({ onGoToMainClick }) {
   const dispatch = useDispatch();
 
-  const isLoggedIn = useSelector((store) => store.isLoggedIn);
-  const loginFields = useSelector((store) => store.loginFields);
-  const loginError = useSelector((store) => store.loginError);
-
-  console.log('loginError ? ', loginError);
+  const isLoggedIn = useSelector(get('isLoggedIn'));
+  const loginFields = useSelector(get('loginFields'));
+  const loginError = useSelector(get('loginError'));
 
   useEffect(() => {
     dispatch(authenticationChange());
