@@ -105,14 +105,6 @@ describe('SignInContainer', () => {
     });
   });
 
-  it('renders login error message when login fail', () => {
-    given('loginError', () => 'LOGIN_ERROR_MESSAGE');
-
-    const { queryByText } = renderSignInContainer();
-
-    expect(queryByText('LOGIN_ERROR_MESSAGE')).not.toBeNull();
-  });
-
   it('calls onSubmit handler when click "방보러 가볼까요? 👉🏻" button', () => {
     const { getByText } = renderSignInContainer();
 
@@ -149,6 +141,22 @@ describe('SignInContainer', () => {
       renderSignInContainer();
 
       expect(handleClick).toBeCalled();
+    });
+  });
+
+  context('when login fail', () => {
+    given('loginError', () => 'LOGIN_ERROR_MESSAGE');
+    it('renders login error message when login fail', async () => {
+      const { queryByText } = renderSignInContainer();
+      expect(queryByText('LOGIN_ERROR_MESSAGE')).not.toBeNull();
+    });
+  });
+
+  context('when login success', () => {
+    given('loginError', () => null);
+    it('renders login error message when login fail', async () => {
+      const { queryByText } = renderSignInContainer();
+      expect(queryByText('LOGIN_ERROR_MESSAGE')).toBeNull();
     });
   });
 });
