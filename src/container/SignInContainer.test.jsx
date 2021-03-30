@@ -144,17 +144,17 @@ describe('SignInContainer', () => {
     });
   });
 
-  context('when login fail', () => {
+  context('with login error', () => {
     given('loginError', () => 'LOGIN_ERROR_MESSAGE');
-    it('renders login error message when login fail', async () => {
+    it('renders login error message', async () => {
       const { queryByText } = renderSignInContainer();
       expect(queryByText('LOGIN_ERROR_MESSAGE')).not.toBeNull();
     });
   });
 
-  context('when login success', () => {
+  context('without login error', () => {
     given('loginError', () => null);
-    it('renders login error message when login fail', async () => {
+    it("doesn't renders login error message", async () => {
       const { queryByText } = renderSignInContainer();
       expect(queryByText('LOGIN_ERROR_MESSAGE')).toBeNull();
     });
