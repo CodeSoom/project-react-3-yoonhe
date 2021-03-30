@@ -4,8 +4,6 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import given from 'given2';
-
 import SignInContainer from './SignInContainer';
 
 import { email as EMAIL } from '../../fixtures/loginFields';
@@ -18,9 +16,10 @@ describe('SignInContainer', () => {
   const handleClick = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockClear();
+    jest.resetAllMocks();
 
     useSelector.mockImplementation((selector) => selector({
+      isLoggedIn: given?.isLoggedIn || false,
       loginError: given?.loginError || null,
       loginFields: {
         email: '',
@@ -130,9 +129,26 @@ describe('SignInContainer', () => {
     expect(handleClick).toBeCalled();
   });
 
-  it('listens isLoggedIn state change', () => {
+  it('listens authentication state change', () => {
     renderSignInContainer();
 
     expect(dispatch).toBeCalled();
+  });
+
+  context('when logout', () => {
+    it('listens listens firebase authentication state change', () => {
+      renderSignInContainer();
+
+      expect(dispatch).toBeCalled();
+    });
+  });
+
+  context('when login', () => {
+    given('isLoggedIn', () => true);
+    it('listens isLoggedIn state change', () => {
+      renderSignInContainer();
+
+      expect(handleClick).toBeCalled();
+    });
   });
 });
