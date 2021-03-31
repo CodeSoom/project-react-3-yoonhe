@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { postLogin, getAuthentication } from './service/api';
+import {
+  postLogin,
+  getAuthentication,
+  getRooms,
+} from './service/api';
 
 const initialState = {
   isResetFirebase: false,
@@ -10,6 +14,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  rooms: [],
 };
 
 const reducers = {
@@ -42,6 +47,12 @@ const reducers = {
       isResetFirebase,
     };
   },
+  setRooms(state, { payload: rooms }) {
+    return {
+      ...state,
+      rooms,
+    };
+  },
 };
 
 const { reducer, actions } = createSlice({
@@ -55,6 +66,7 @@ export const {
   setIsLoggedIn,
   setFirebaseReset,
   setIsLoginError,
+  setRooms,
 } = actions;
 
 export function loginRequest() {
@@ -80,6 +92,17 @@ export function loginRequest() {
 export function authenticationChange() {
   return async (dispatch) => {
     getAuthentication(dispatch);
+  };
+}
+
+export function loadRooms() {
+  return async (dispatch) => {
+    try {
+      const rooms = await getRooms();
+      dispatch(setRooms(rooms));
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 

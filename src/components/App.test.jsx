@@ -89,6 +89,6 @@ describe('App', () => {
     const path = '/main';
     const { queryByText } = renderApp({ path });
 
-    expect(queryByText('Main')).not.toBeNull();
+    expect(queryByText('메인 페이지')).not.toBeNull();
   });
 });

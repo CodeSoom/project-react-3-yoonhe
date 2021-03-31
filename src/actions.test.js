@@ -1,9 +1,9 @@
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 import configureStore from 'redux-mock-store';
 
-import { loginRequest } from './slice';
+import { loadRooms, loginRequest } from './slice';
 
-import { postLogin } from './service/api';
+import { getRooms, postLogin } from './service/api';
 
 const middlewares = getDefaultMiddleware();
 const mockStore = configureStore(middlewares);
@@ -38,6 +38,33 @@ describe('actions', () => {
         {
           type: 'roomPreviews/setIsLoginError',
           payload: '계정을 찾을 수 없습니다 👀',
+        },
+      ]);
+    });
+  });
+
+  describe('loadRooms', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      store = mockStore({
+        loginFields: {
+          rooms: [],
+        },
+      });
+
+      getRooms.mockResolvedValue([]);
+    });
+
+    it('runs setRooms', async () => {
+      await store.dispatch(loadRooms());
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        {
+          type: 'roomPreviews/setRooms',
+          payload: [],
         },
       ]);
     });
