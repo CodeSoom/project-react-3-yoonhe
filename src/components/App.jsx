@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import MianPage from '../pages/MainPage';
 import SignInPage from '../pages/SignInPage';
 
 export default function App() {
@@ -11,7 +12,7 @@ export default function App() {
           <SignInPage />
         </Route>
         <Route exact path="/main">
-          <div>Main</div>
+          <MianPage />
         </Route>
         <Route path="/signup">
           <div>회원가입</div>

@@ -17,6 +17,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
+      rooms: [],
     };
 
     const state = reducer(undefined, { type: 'none' });
