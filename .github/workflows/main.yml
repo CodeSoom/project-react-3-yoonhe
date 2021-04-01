@@ -21,6 +21,9 @@ jobs:
           APP_ID : ${{ secrets.APP_ID }}
           MEASUREMENT_ID : ${{ secrets.MEASUREMENT_ID }}
           TEST : ${{ secrets.TEST }}
+          directory: '/project-react-3-yoonhe'
+          file_name: .env
+          
  
 
       - name: Install and Build 🔧 
