@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import MianPage from '../pages/MainPage';
 import SignInPage from '../pages/SignInPage';
 
+import { watchAuthentication } from '../slice';
+
 export default function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(watchAuthentication());
+  }, []);
+
   return (
     <>
       <Switch>

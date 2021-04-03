@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import SignIn from '../components/SignIn';
 
 import {
-  authenticationChange,
   changeLoginFields,
   loginRequest,
 } from '../slice';
@@ -17,10 +16,6 @@ export default function SignInContainer({ onGoToMainClick }) {
   const isLoggedIn = useSelector(get('isLoggedIn'));
   const loginFields = useSelector(get('loginFields'));
   const loginError = useSelector(get('loginError'));
-
-  useEffect(() => {
-    dispatch(authenticationChange());
-  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {

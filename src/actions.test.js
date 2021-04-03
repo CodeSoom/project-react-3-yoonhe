@@ -1,15 +1,17 @@
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 import configureStore from 'redux-mock-store';
 
-import { loadRooms, loginRequest } from './slice';
+import {
+  watchAuthentication, loadRooms, loginRequest, userAuthenticationChange,
+} from './slice';
 
-import { getRooms, postLogin } from './service/api';
+import { getRooms, postLogin, getAuthentication } from './service/api';
 
 const middlewares = getDefaultMiddleware();
 const mockStore = configureStore(middlewares);
 
 jest.mock('./service/api');
-jest.mock('./firebase');
+jest.mock('./service/firebase');
 
 describe('actions', () => {
   let store;
@@ -67,6 +69,74 @@ describe('actions', () => {
           payload: [],
         },
       ]);
+    });
+  });
+
+  describe('watchAuthentication', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      store = mockStore({});
+    });
+
+    it('runs setRooms', async () => {
+      await store.dispatch(watchAuthentication());
+
+      expect(getAuthentication).toBeCalled();
+    });
+  });
+
+  describe('userAuthenticationChange', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      store = mockStore({});
+    });
+
+    context('with logged in', () => {
+      it('runs setRooms', async () => {
+        await store.dispatch(userAuthenticationChange('USER'));
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([
+          {
+            type: 'roomPreviews/setFirebaseReset',
+            payload: false,
+          },
+          {
+            type: 'roomPreviews/setIsLoggedIn',
+            payload: true,
+          },
+          {
+            type: 'roomPreviews/setFirebaseReset',
+            payload: true,
+          },
+        ]);
+      });
+    });
+
+    context('with logged out', () => {
+      it('runs setRooms', async () => {
+        await store.dispatch(userAuthenticationChange(null));
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([
+          {
+            type: 'roomPreviews/setFirebaseReset',
+            payload: false,
+          },
+          {
+            type: 'roomPreviews/setIsLoggedIn',
+            payload: false,
+          },
+          {
+            type: 'roomPreviews/setFirebaseReset',
+            payload: true,
+          },
+        ]);
+      });
     });
   });
 });
