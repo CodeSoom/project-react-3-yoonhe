@@ -35,6 +35,12 @@ describe('App', () => {
     ));
   }
 
+  it('listens listens firebase authentication state change', () => {
+    renderApp();
+
+    expect(dispatch).toBeCalled();
+  });
+
   it('renders welcome messages and service Introduction', () => {
     const { queryByText } = renderApp();
 
