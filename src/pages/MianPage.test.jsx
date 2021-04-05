@@ -2,12 +2,12 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import MianPage from './MainPage';
+import MainPage from './MainPage';
 
 jest.mock('../service/api');
 jest.mock('react-redux');
 
-describe('MianPage', () => {
+describe('MainPage', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
@@ -16,9 +16,9 @@ describe('MianPage', () => {
     useDispatch.mockImplementation(() => dispatch);
   });
 
-  it('renders MianPage', () => {
+  it('renders MainPage', () => {
     const { queryByText } = render((
-      <MianPage />
+      <MainPage />
     ));
 
     expect(queryByText('메인 페이지')).not.toBeNull();
