@@ -15,6 +15,13 @@ const initialState = {
     password: '',
   },
   rooms: [],
+  addRoomFields: {
+    address: '',
+    moveInType: '',
+    deposit: '',
+    monthlyRent: '',
+    adminCost: '',
+  },
 };
 
 const reducers = {
@@ -53,6 +60,16 @@ const reducers = {
       rooms,
     };
   },
+  setAddRoomFields(state, { payload: { name, value } }) {
+    const { addRoomFields } = state;
+    return {
+      ...state,
+      addRoomFields: {
+        ...addRoomFields,
+        [name]: value,
+      },
+    };
+  },
 };
 
 const { reducer, actions } = createSlice({
@@ -67,6 +84,7 @@ export const {
   setFirebaseReset,
   setIsLoginError,
   setRooms,
+  setAddRoomFields,
 } = actions;
 
 export function loginRequest() {

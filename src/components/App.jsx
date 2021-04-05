@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import MianPage from '../pages/MainPage';
 import SignInPage from '../pages/SignInPage';
+import AddRoomPage from '../pages/AddRoomPage';
 
 import { watchAuthentication } from '../slice';
 
@@ -22,6 +23,9 @@ export default function App() {
         </Route>
         <Route exact path="/main">
           <MianPage />
+        </Route>
+        <Route exact path="/addRoom">
+          <AddRoomPage />
         </Route>
         <Route path="/signup">
           <div>회원가입</div>

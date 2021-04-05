@@ -97,4 +97,11 @@ describe('App', () => {
 
     expect(queryByText('메인 페이지')).not.toBeNull();
   });
+
+  it('renders "addRoom" page', () => {
+    const path = '/addRoom';
+    const { queryByText } = renderApp({ path });
+
+    expect(queryByText('살았던 혹은 살고계신 방을 알려주세요 😊')).not.toBeNull();
+  });
 });
