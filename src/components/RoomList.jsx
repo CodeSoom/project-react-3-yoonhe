@@ -9,7 +9,7 @@ export default function RoomList({ rooms }) {
             const {
               id,
               address,
-              occupancyType,
+              moveInType,
               monthlyRent,
               deposit,
               lightning,
@@ -21,7 +21,7 @@ export default function RoomList({ rooms }) {
                 <div>
                   <span>{address}</span>
                   <span>
-                    {occupancyType}
+                    {moveInType}
                     {' '}
                     {monthlyRent}
                     /

@@ -7,7 +7,7 @@ const rooms = [{
   moisture: 5,
   monthlyRent: 50,
   noise: 1,
-  occupancyType: '월세',
+  moveInType: '월세',
   ventilation: 5,
   worm: 1,
 }];
