@@ -89,9 +89,24 @@ export function loginRequest() {
   };
 }
 
-export function authenticationChange() {
+export function userAuthenticationChange(user) {
+  return (dispatch) => {
+    dispatch(setFirebaseReset(false));
+    const isLoggedIn = !!user;
+    dispatch(setIsLoggedIn(isLoggedIn));
+    dispatch(setFirebaseReset(true));
+  };
+}
+
+export function firebaseAuthenticationChange(dispatch) {
+  return (user) => {
+    dispatch(userAuthenticationChange(user));
+  };
+}
+
+export function watchAuthentication() {
   return async (dispatch) => {
-    getAuthentication(dispatch);
+    getAuthentication(firebaseAuthenticationChange(dispatch));
   };
 }
 

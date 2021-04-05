@@ -1,5 +1,4 @@
-import { authService, dbService } from '../firebase';
-import { setFirebaseReset, setIsLoggedIn } from '../slice';
+import { authService, dbService } from './firebase';
 
 export const postSignup = ({ email, password }) => {
   authService.createUserWithEmailAndPassword(email, password);
@@ -9,12 +8,9 @@ export const postLogin = async ({ email, password }) => {
   await authService.signInWithEmailAndPassword(email, password);
 };
 
-export const getAuthentication = async (dispatch) => {
+export const getAuthentication = async (authenticationDispatches) => {
   await authService.onAuthStateChanged((user) => {
-    dispatch(setFirebaseReset(false));
-    const isLoggedIn = !!user;
-    dispatch(setIsLoggedIn(isLoggedIn));
-    dispatch(setFirebaseReset(true));
+    authenticationDispatches(user);
   });
 };
 

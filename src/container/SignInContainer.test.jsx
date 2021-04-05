@@ -33,12 +33,6 @@ describe('SignInContainer', () => {
     return render(<SignInContainer onGoToMainClick={handleClick} />);
   }
 
-  it('listens authentication change', () => {
-    renderSignInContainer();
-
-    expect(dispatch).toBeCalled();
-  });
-
   it('renders Email field', () => {
     const { queryByPlaceholderText } = renderSignInContainer();
 
@@ -121,26 +115,21 @@ describe('SignInContainer', () => {
     expect(handleClick).toBeCalled();
   });
 
-  it('listens authentication state change', () => {
-    renderSignInContainer();
-
-    expect(dispatch).toBeCalled();
-  });
-
-  context('when logout', () => {
-    it('listens listens firebase authentication state change', () => {
-      renderSignInContainer();
-
-      expect(dispatch).toBeCalled();
-    });
-  });
-
   context('when login', () => {
     given('isLoggedIn', () => true);
-    it('listens isLoggedIn state change', () => {
+    it('calls handleClick when isLoggedIn is true', () => {
       renderSignInContainer();
 
       expect(handleClick).toBeCalled();
+    });
+  });
+
+  context('when logout', () => {
+    given('isLoggedIn', () => false);
+    it("doesn't calls handleClick when isLoggedIn is false", () => {
+      renderSignInContainer();
+
+      expect(handleClick).not.toBeCalled();
     });
   });
 

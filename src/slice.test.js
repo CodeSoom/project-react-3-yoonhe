@@ -1,11 +1,11 @@
 import reducer, {
-  changeLoginFields, setIsLoggedIn, setFirebaseReset, setIsLoginError,
+  changeLoginFields, setIsLoggedIn, setFirebaseReset, setIsLoginError, setRooms,
 } from './slice';
 
 import { email as EMAIL } from '../fixtures/loginFields';
 
 jest.mock('./service/api');
-jest.mock('./firebase');
+jest.mock('./service/firebase');
 
 describe('reducer', () => {
   it('renders initial data', () => {
@@ -58,6 +58,22 @@ describe('reducer', () => {
       const state = reducer(initialState, setIsLoginError('LOGIN_ERROR_MESSAGE'));
 
       expect(state.loginError).toBe('LOGIN_ERROR_MESSAGE');
+    });
+  });
+
+  describe('setRooms', () => {
+    it('change rooms', () => {
+      const initialState = {
+        rooms: [],
+      };
+
+      const state = reducer(initialState, setRooms([
+        {
+          address: '서울시 강남구',
+        },
+      ]));
+
+      expect(state.rooms[0].address).toBe('서울시 강남구');
     });
   });
 

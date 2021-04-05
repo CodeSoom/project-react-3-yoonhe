@@ -13,8 +13,6 @@ const firebaseConfig = {
   measurementId: process.env.MEASUREMENT_ID,
 };
 
-console.log('process.env.API_KEY ? ', process.env.TEST);
-
 export const firebaseInstance = firebase.initializeApp(firebaseConfig);
 export const dbService = firebase.firestore();
 export const authService = firebase.auth();
