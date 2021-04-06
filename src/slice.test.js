@@ -1,5 +1,10 @@
 import reducer, {
-  changeLoginFields, setIsLoggedIn, setFirebaseReset, setIsLoginError, setRooms,
+  changeLoginFields,
+  setIsLoggedIn,
+  setFirebaseReset,
+  setIsLoginError,
+  setRooms,
+  setAddRoomFields,
 } from './slice';
 
 import { email as EMAIL } from '../fixtures/loginFields';
@@ -18,6 +23,13 @@ describe('reducer', () => {
         password: '',
       },
       rooms: [],
+      addRoomFields: {
+        address: given.address || '',
+        moveInType: given.moveInType || '',
+        deposit: given.deposit || '',
+        monthlyRent: given.monthlyRent || '',
+        adminCost: given.adminCost || '',
+      },
     };
 
     const state = reducer(undefined, { type: 'none' });
@@ -74,6 +86,21 @@ describe('reducer', () => {
       ]));
 
       expect(state.rooms[0].address).toBe('서울시 강남구');
+    });
+  });
+
+  describe('setAddRoomFields', () => {
+    it('change addRoomFields', () => {
+      const initialState = {
+        addRoomFields: {},
+      };
+
+      const state = reducer(initialState, setAddRoomFields({
+        name: 'address',
+        value: '서울시 강남구 역삼동',
+      }));
+
+      expect(state.addRoomFields.address).toBe('서울시 강남구 역삼동');
     });
   });
 
