@@ -50,16 +50,11 @@ describe('AddRoomContainer', () => {
   it('renders input radio controls', () => {
     const { queryByText, queryAllByLabelText } = renderAddRoomContainer();
 
-    expect(queryByText('채광 나쁨')).not.toBeNull();
-    expect(queryByText('채광 좋음')).not.toBeNull();
-    expect(queryByText('통풍 나쁨')).not.toBeNull();
-    expect(queryByText('통풍 좋음')).not.toBeNull();
-    expect(queryByText('습기 적음')).not.toBeNull();
-    expect(queryByText('습기 많음')).not.toBeNull();
-    expect(queryByText('해충 적음')).not.toBeNull();
-    expect(queryByText('해충 많음')).not.toBeNull();
-    expect(queryByText('소음 적음')).not.toBeNull();
-    expect(queryByText('소음 많음')).not.toBeNull();
+    expect(queryByText('채광')).not.toBeNull();
+    expect(queryByText('통풍')).not.toBeNull();
+    expect(queryByText('습기')).not.toBeNull();
+    expect(queryByText('해충')).not.toBeNull();
+    expect(queryByText('소음')).not.toBeNull();
 
     expect(queryAllByLabelText('1')).not.toBeNull();
     expect(queryAllByLabelText('2')).not.toBeNull();

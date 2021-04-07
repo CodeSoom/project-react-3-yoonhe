@@ -21,6 +21,11 @@ const initialState = {
     deposit: '',
     monthlyRent: '',
     adminCost: '',
+    lightning: null,
+    ventilation: null,
+    moisture: null,
+    worm: null,
+    noise: null,
   },
 };
 
