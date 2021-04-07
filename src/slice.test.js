@@ -24,11 +24,16 @@ describe('reducer', () => {
       },
       rooms: [],
       addRoomFields: {
-        address: given.address || '',
-        moveInType: given.moveInType || '',
-        deposit: given.deposit || '',
-        monthlyRent: given.monthlyRent || '',
-        adminCost: given.adminCost || '',
+        address: '',
+        moveInType: '',
+        deposit: '',
+        monthlyRent: '',
+        adminCost: '',
+        lightning: null,
+        ventilation: null,
+        moisture: null,
+        worm: null,
+        noise: null,
       },
     };
 
