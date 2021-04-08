@@ -16,9 +16,11 @@ describe('Rooms', () => {
     it('renders room scroe controls', () => {
       const { queryByText } = renderRooms(ROOMS);
 
-      expect(queryByText('채광 ☀️')).not.toBeNull();
-      expect(queryByText('습기 💧️')).not.toBeNull();
-      expect(queryByText('통풍 🍃')).not.toBeNull();
+      const categories = ['채광 ☀️', '습기 💧️', '통풍 🍃'];
+
+      categories.forEach((category) => {
+        expect(queryByText(category)).not.toBeNull();
+      });
     });
   });
 
