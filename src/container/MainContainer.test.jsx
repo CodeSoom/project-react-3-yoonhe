@@ -35,12 +35,11 @@ describe('MainContainer', () => {
   it('renders rooms', () => {
     const { queryByText } = renderMainContainer();
 
-    expect(queryByText('베스트 하우스 ✨')).not.toBeNull();
-    expect(queryByText('서울시 강남구')).not.toBeNull();
-    expect(queryByText('월세 50/3000')).not.toBeNull();
-    expect(queryByText('채광 ☀️')).not.toBeNull();
-    expect(queryByText('습기 💧️')).not.toBeNull();
-    expect(queryByText('통풍 🍃')).not.toBeNull();
+    const contents = ['베스트 하우스 ✨', '서울시 강남구', '월세 50/3000', '채광 ☀️', '습기 💧️', '통풍 🍃'];
+
+    contents.forEach((content) => {
+      expect(queryByText(content)).not.toBeNull();
+    });
   });
 
   it('dispatches "loadRooms" action', () => {

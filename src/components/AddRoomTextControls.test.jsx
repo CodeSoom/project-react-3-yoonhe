@@ -18,11 +18,11 @@ describe('AddRoomTextControls', () => {
   it('renders inpt text controls', () => {
     const { queryByLabelText } = renderAddRoomTextControls();
 
-    expect(queryByLabelText('주소')).not.toBeNull();
-    expect(queryByLabelText('입주 유형')).not.toBeNull();
-    expect(queryByLabelText('보증금')).not.toBeNull();
-    expect(queryByLabelText('월세')).not.toBeNull();
-    expect(queryByLabelText('관리비')).not.toBeNull();
+    const labels = ['주소', '입주 유형', '보증금', '월세', '관리비'];
+
+    labels.forEach((label) => {
+      expect(queryByLabelText(label)).not.toBeNull();
+    });
   });
 
   it('calls onChange handler when input change', () => {

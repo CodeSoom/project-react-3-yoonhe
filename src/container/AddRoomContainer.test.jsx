@@ -40,27 +40,26 @@ describe('AddRoomContainer', () => {
   it('renders input text controls', () => {
     const { queryByLabelText } = renderAddRoomContainer();
 
-    expect(queryByLabelText('주소')).not.toBeNull();
-    expect(queryByLabelText('입주 유형')).not.toBeNull();
-    expect(queryByLabelText('보증금')).not.toBeNull();
-    expect(queryByLabelText('월세')).not.toBeNull();
-    expect(queryByLabelText('관리비')).not.toBeNull();
+    const labels = ['주소', '입주 유형', '보증금', '월세', '관리비'];
+
+    labels.forEach((label) => {
+      expect(queryByLabelText(label)).not.toBeNull();
+    });
   });
 
   it('renders input radio controls', () => {
     const { queryByText, queryAllByLabelText } = renderAddRoomContainer();
 
-    expect(queryByText('채광')).not.toBeNull();
-    expect(queryByText('통풍')).not.toBeNull();
-    expect(queryByText('습기')).not.toBeNull();
-    expect(queryByText('해충')).not.toBeNull();
-    expect(queryByText('소음')).not.toBeNull();
+    const categories = ['채광', '통풍', '습기', '해충', '소음'];
+    const scores = [1, 2, 3, 4, 5];
 
-    expect(queryAllByLabelText('1')).not.toBeNull();
-    expect(queryAllByLabelText('2')).not.toBeNull();
-    expect(queryAllByLabelText('3')).not.toBeNull();
-    expect(queryAllByLabelText('4')).not.toBeNull();
-    expect(queryAllByLabelText('5')).not.toBeNull();
+    categories.forEach((category) => {
+      expect(queryByText(category)).not.toBeNull();
+    });
+
+    scores.forEach((score) => {
+      expect(queryAllByLabelText(score)).not.toBeNull();
+    });
   });
 
   it('calls onChange handler when input change', () => {
