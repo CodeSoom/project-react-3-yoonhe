@@ -102,19 +102,13 @@ describe('AddRoomContainer', () => {
       });
 
       expect(dispatch).toBeCalledWith({
-        type: 'roomPreviews/setAddRoomFields',
+        type: 'roomPreviews/changeAddRoomFields',
         payload: {
           name,
           value,
         },
       });
     });
-  });
-
-  it('renders "등록하기" button', () => {
-    const { queryByText } = renderAddRoomContainer();
-
-    expect(queryByText('등록하기')).not.toBeNull();
   });
 
   it('renders image upload control', () => {
@@ -137,6 +131,20 @@ describe('AddRoomContainer', () => {
         },
       });
     });
+
+    expect(dispatch).toBeCalled();
+  });
+
+  it('renders "등록하기" button', () => {
+    const { queryByText } = renderAddRoomContainer();
+
+    expect(queryByText('등록하기')).not.toBeNull();
+  });
+
+  it('calls onSubmit handler when "등록하기" button click', () => {
+    const { getByText } = renderAddRoomContainer();
+
+    fireEvent.click(getByText('등록하기'));
 
     expect(dispatch).toBeCalled();
   });

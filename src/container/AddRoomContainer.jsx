@@ -5,11 +5,12 @@ import AddRoomScoreControls from '../components/AddRoomScoreControls';
 import AddRoomTextControls from '../components/AddRoomTextControls';
 
 import {
-  setAddRoomFields,
-  setAddRoomImagesField,
+  addRoom,
+  changeAddRoomFields,
+  changeRoomImages,
 } from '../slice';
 
-import { get, readFile } from '../../utils';
+import { get, getReadFile } from '../../utils';
 
 export default function AddRoomContainer() {
   const addRoomFields = useSelector(get('addRoomFields'));
@@ -18,24 +19,26 @@ export default function AddRoomContainer() {
   const dispatch = useDispatch();
 
   function handleChange({ name, value }) {
-    dispatch(setAddRoomFields({ name, value }));
+    dispatch(changeAddRoomFields({ name, value }));
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    dispatch(addRoom());
   }
 
   async function handleFileChange(event) {
     const { files } = event.target;
 
-    const getImagePromises = [].map.call(files, async (file) => {
-      const result = await readFile(file);
+    const getReadFilePromises = [].map.call(files, async (file) => {
+      const result = await getReadFile(file);
       return result;
     });
 
-    const uploadImages = await Promise.all(getImagePromises);
+    const uploadImages = await Promise.all(getReadFilePromises);
 
-    dispatch(setAddRoomImagesField(uploadImages));
+    dispatch(changeRoomImages(uploadImages));
   }
 
   return (
@@ -57,7 +60,7 @@ export default function AddRoomContainer() {
           </p>
           <ul>
             {images.map((image) => (
-              <li key={`uploadImage${new Date()}`}>
+              <li key={image}>
                 <img src={image} width="50px" height="50px" />
               </li>
             ))}

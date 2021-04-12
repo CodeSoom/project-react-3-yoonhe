@@ -2,7 +2,12 @@ import { getDefaultMiddleware } from '@reduxjs/toolkit';
 import configureStore from 'redux-mock-store';
 
 import {
-  watchAuthentication, loadRooms, loginRequest, userAuthenticationChange,
+  watchAuthentication,
+  loginRequest,
+  userAuthenticationChange,
+  loadRooms,
+  addRoom,
+  initialAddRoomFields,
 } from './slice';
 
 import { getRooms, postLogin, getAuthentication } from './service/api';
@@ -137,6 +142,31 @@ describe('actions', () => {
           },
         ]);
       });
+    });
+  });
+
+  describe('addRooms', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      store = mockStore({
+        addRoomFields: {
+          images: [],
+        },
+      });
+    });
+
+    it('runs set setAddRoomFields', async () => {
+      await store.dispatch(addRoom());
+
+      const actions = store.getActions();
+
+      expect(actions).toEqual([
+        {
+          type: 'roomPreviews/setAddRoomFields',
+          payload: initialAddRoomFields,
+        },
+      ]);
     });
   });
 });

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import AddRoomPage from './AddRoomPage';
 
@@ -14,6 +14,17 @@ describe('AddRoomPage', () => {
     dispatch.mockReset();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector({
+      addRoomFields: {
+        address: '',
+        moveInType: '',
+        deposit: '',
+        monthlyRent: '',
+        adminCost: '',
+        images: [],
+      },
+    }));
   });
 
   it('renders AddRoomPage', () => {
