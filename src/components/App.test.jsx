@@ -23,6 +23,14 @@ describe('App', () => {
         password: PASSWORD,
       },
       isLoggedIn: false,
+      addRoomFields: {
+        address: '',
+        moveInType: '',
+        deposit: '',
+        monthlyRent: '',
+        adminCost: '',
+        images: [],
+      },
     }));
     useDispatch.mockImplementation(() => dispatch);
   });

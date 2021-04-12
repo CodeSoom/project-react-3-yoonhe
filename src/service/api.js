@@ -1,4 +1,6 @@
-import { authService, dbService } from './firebase';
+import { v4 as uuidv4 } from 'uuid';
+
+import { authService, dbService, storageService } from './firebase';
 
 export const postSignup = ({ email, password }) => {
   authService.createUserWithEmailAndPassword(email, password);
@@ -26,3 +28,15 @@ export const getRooms = async () => {
 
   return rooms;
 };
+
+export async function getReadFile(image) {
+  const storageRef = await storageService.ref().child(`images/${uuidv4()}`);
+  const response = await storageRef.putString(image, 'data_url');
+  const getUrl = await response.ref.getDownloadURL();
+
+  return getUrl;
+}
+
+export async function postRoom(fields) {
+  await dbService.collection('rooms').add(fields);
+}

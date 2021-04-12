@@ -1,11 +1,13 @@
 import reducer, {
-  changeLoginFields,
   setIsLoggedIn,
   setFirebaseReset,
   setIsLoginError,
   setRooms,
   setAddRoomFields,
-  setAddRoomImagesField,
+  changeLoginFields,
+  changeAddRoomFields,
+  changeRoomImages,
+  initialAddRoomFields,
 } from './slice';
 
 import { email as EMAIL } from '../fixtures/loginFields';
@@ -102,16 +104,13 @@ describe('reducer', () => {
         addRoomFields: {},
       };
 
-      const state = reducer(initialState, setAddRoomFields({
-        name: 'address',
-        value: '서울시 강남구 역삼동',
-      }));
+      const state = reducer(initialState, setAddRoomFields(initialAddRoomFields));
 
-      expect(state.addRoomFields.address).toBe('서울시 강남구 역삼동');
+      expect(state.addRoomFields).toEqual(initialAddRoomFields);
     });
   });
 
-  describe('setAddRoomImagesField', () => {
+  describe('changeRoomImages', () => {
     it('change images in addRoomFields', () => {
       const initialState = {
         addRoomFields: {
@@ -119,13 +118,28 @@ describe('reducer', () => {
         },
       };
 
-      const state = reducer(initialState, setAddRoomImagesField([
+      const state = reducer(initialState, changeRoomImages([
         'FILE_1',
         'FILE_2',
         'FILE_3',
       ]));
 
       expect(state.addRoomFields.images).toHaveLength(3);
+    });
+  });
+
+  describe('changeAddRoomFields', () => {
+    it('change addRoomFields', () => {
+      const initialState = {
+        addRoomFields: {},
+      };
+
+      const state = reducer(initialState, changeAddRoomFields({
+        name: 'address',
+        value: '서울시 강남구 역삼동',
+      }));
+
+      expect(state.addRoomFields.address).toBe('서울시 강남구 역삼동');
     });
   });
 

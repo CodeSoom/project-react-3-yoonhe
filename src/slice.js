@@ -4,7 +4,23 @@ import {
   postLogin,
   getAuthentication,
   getRooms,
+  getReadFile,
+  postRoom,
 } from './service/api';
+
+export const initialAddRoomFields = {
+  address: '',
+  moveInType: '',
+  deposit: '',
+  monthlyRent: '',
+  adminCost: '',
+  lightning: null,
+  ventilation: null,
+  moisture: null,
+  worm: null,
+  noise: null,
+  images: [],
+};
 
 const initialState = {
   isResetFirebase: false,
@@ -15,19 +31,7 @@ const initialState = {
     password: '',
   },
   rooms: [],
-  addRoomFields: {
-    address: '',
-    moveInType: '',
-    deposit: '',
-    monthlyRent: '',
-    adminCost: '',
-    lightning: null,
-    ventilation: null,
-    moisture: null,
-    worm: null,
-    noise: null,
-    images: [],
-  },
+  addRoomFields: initialAddRoomFields,
 };
 
 const reducers = {
@@ -38,6 +42,16 @@ const reducers = {
       ...state,
       loginFields: {
         ...loginFields,
+        [name]: value,
+      },
+    };
+  },
+  changeAddRoomFields(state, { payload: { name, value } }) {
+    const { addRoomFields } = state;
+    return {
+      ...state,
+      addRoomFields: {
+        ...addRoomFields,
         [name]: value,
       },
     };
@@ -66,17 +80,13 @@ const reducers = {
       rooms,
     };
   },
-  setAddRoomFields(state, { payload: { name, value } }) {
-    const { addRoomFields } = state;
+  setAddRoomFields(state, { payload: addRoomFields }) {
     return {
       ...state,
-      addRoomFields: {
-        ...addRoomFields,
-        [name]: value,
-      },
+      addRoomFields,
     };
   },
-  setAddRoomImagesField(state, { payload: newImages }) {
+  changeRoomImages(state, { payload: newImages }) {
     const { addRoomFields } = state;
     const { images } = addRoomFields;
 
@@ -97,13 +107,14 @@ const { reducer, actions } = createSlice({
 });
 
 export const {
-  changeLoginFields,
   setIsLoggedIn,
   setFirebaseReset,
   setIsLoginError,
   setRooms,
   setAddRoomFields,
-  setAddRoomImagesField,
+  changeLoginFields,
+  changeAddRoomFields,
+  changeRoomImages,
 } = actions;
 
 export function loginRequest() {
@@ -155,6 +166,25 @@ export function loadRooms() {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+
+export function addRoom() {
+  return async (dispatch, getState) => {
+    const { addRoomFields } = getState();
+    const { images } = addRoomFields;
+
+    const getSavedUrls = images.map((image) => getReadFile(image));
+    const urls = await Promise.all(getSavedUrls);
+
+    const fields = {
+      ...addRoomFields,
+      images: urls,
+    };
+
+    postRoom(fields);
+
+    dispatch(setAddRoomFields(initialAddRoomFields));
   };
 }
 
