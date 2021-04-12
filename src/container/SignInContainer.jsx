@@ -8,7 +8,7 @@ import {
   loginRequest,
 } from '../slice';
 
-import { get } from '../utils';
+import { get } from '../../utils';
 
 export default function SignInContainer({ onGoToMainClick }) {
   const dispatch = useDispatch();
