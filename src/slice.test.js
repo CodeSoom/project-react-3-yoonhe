@@ -5,6 +5,7 @@ import reducer, {
   setIsLoginError,
   setRooms,
   setAddRoomFields,
+  setAddRoomImagesField,
 } from './slice';
 
 import { email as EMAIL } from '../fixtures/loginFields';
@@ -34,6 +35,7 @@ describe('reducer', () => {
         moisture: null,
         worm: null,
         noise: null,
+        images: [],
       },
     };
 
@@ -106,6 +108,24 @@ describe('reducer', () => {
       }));
 
       expect(state.addRoomFields.address).toBe('서울시 강남구 역삼동');
+    });
+  });
+
+  describe('setAddRoomImagesField', () => {
+    it('change images in addRoomFields', () => {
+      const initialState = {
+        addRoomFields: {
+          images: [],
+        },
+      };
+
+      const state = reducer(initialState, setAddRoomImagesField([
+        'FILE_1',
+        'FILE_2',
+        'FILE_3',
+      ]));
+
+      expect(state.addRoomFields.images).toHaveLength(3);
     });
   });
 

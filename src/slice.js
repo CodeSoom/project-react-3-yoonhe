@@ -26,6 +26,7 @@ const initialState = {
     moisture: null,
     worm: null,
     noise: null,
+    images: [],
   },
 };
 
@@ -75,6 +76,18 @@ const reducers = {
       },
     };
   },
+  setAddRoomImagesField(state, { payload: newImages }) {
+    const { addRoomFields } = state;
+    const { images } = addRoomFields;
+
+    return {
+      ...state,
+      addRoomFields: {
+        ...addRoomFields,
+        images: [...images, ...newImages],
+      },
+    };
+  },
 };
 
 const { reducer, actions } = createSlice({
@@ -90,6 +103,7 @@ export const {
   setIsLoginError,
   setRooms,
   setAddRoomFields,
+  setAddRoomImagesField,
 } = actions;
 
 export function loginRequest() {
