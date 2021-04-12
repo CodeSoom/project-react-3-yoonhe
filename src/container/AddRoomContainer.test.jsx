@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,6 +21,7 @@ describe('AddRoomContainer', () => {
         deposit: '',
         monthlyRent: '',
         adminCost: '',
+        images: [],
       },
     }));
 
@@ -108,5 +109,35 @@ describe('AddRoomContainer', () => {
         },
       });
     });
+  });
+
+  it('renders "등록하기" button', () => {
+    const { queryByText } = renderAddRoomContainer();
+
+    expect(queryByText('등록하기')).not.toBeNull();
+  });
+
+  it('renders image upload control', () => {
+    const { queryByText } = renderAddRoomContainer();
+
+    expect(queryByText('방 사진 등록하기')).not.toBeNull();
+  });
+
+  it('calls onChange handler when input file change', async () => {
+    const { getByLabelText } = renderAddRoomContainer();
+
+    await waitFor(() => {
+      fireEvent.change(getByLabelText('방 사진 등록하기'), {
+        target: {
+          files: {
+            0: {
+              name: 'test.png',
+            },
+          },
+        },
+      });
+    });
+
+    expect(dispatch).toBeCalled();
   });
 });
