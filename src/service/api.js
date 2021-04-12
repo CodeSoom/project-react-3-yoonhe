@@ -29,7 +29,7 @@ export const getRooms = async () => {
   return rooms;
 };
 
-export async function getReadFile(image) {
+export async function getSavedFileLink(image) {
   const storageRef = await storageService.ref().child(`images/${uuidv4()}`);
   const response = await storageRef.putString(image, 'data_url');
   const getUrl = await response.ref.getDownloadURL();

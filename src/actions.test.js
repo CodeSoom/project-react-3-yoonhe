@@ -6,11 +6,15 @@ import {
   loginRequest,
   userAuthenticationChange,
   loadRooms,
-  addRoom,
   initialAddRoomFields,
+  requestAddRoom,
 } from './slice';
 
-import { getRooms, postLogin, getAuthentication } from './service/api';
+import {
+  getRooms,
+  postLogin,
+  getAuthentication,
+} from './service/api';
 
 const middlewares = getDefaultMiddleware();
 const mockStore = configureStore(middlewares);
@@ -145,19 +149,30 @@ describe('actions', () => {
     });
   });
 
-  describe('addRooms', () => {
+  describe('requestAddRoom', () => {
     beforeEach(() => {
       jest.clearAllMocks();
 
       store = mockStore({
+        rooms: [],
         addRoomFields: {
-          images: [],
+          address: '서울시 강남구',
+          moveInType: '전세',
+          monthlyRent: '30',
+          deposit: '5000',
+          adminCost: '4',
+          worm: 4,
+          lightning: 4,
+          ventilation: 4,
+          moisture: 4,
+          noise: 4,
+          images: ['URL'],
         },
       });
     });
 
     it('runs set setAddRoomFields', async () => {
-      await store.dispatch(addRoom());
+      await store.dispatch(requestAddRoom());
 
       const actions = store.getActions();
 

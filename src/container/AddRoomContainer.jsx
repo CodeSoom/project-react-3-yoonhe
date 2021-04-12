@@ -5,14 +5,14 @@ import AddRoomScoreControls from '../components/AddRoomScoreControls';
 import AddRoomTextControls from '../components/AddRoomTextControls';
 
 import {
-  addRoom,
+  requestAddRoom,
   changeAddRoomFields,
   changeRoomImages,
 } from '../slice';
 
 import { get, getReadFile } from '../../utils';
 
-export default function AddRoomContainer() {
+export default function AddRoomContainer({ onGoToMain }) {
   const addRoomFields = useSelector(get('addRoomFields'));
   const { images } = addRoomFields;
 
@@ -25,7 +25,9 @@ export default function AddRoomContainer() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(addRoom());
+    dispatch(requestAddRoom());
+
+    onGoToMain();
   }
 
   async function handleFileChange(event) {
