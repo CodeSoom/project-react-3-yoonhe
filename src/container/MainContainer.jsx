@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RoomList from '../components/RoomList';
 
 import { loadRooms } from '../slice';
-import { get } from '../utils';
+import { get } from '../../utils';
 
 export default function MainContainer() {
   const dispatch = useDispatch();
