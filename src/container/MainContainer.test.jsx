@@ -35,7 +35,14 @@ describe('MainContainer', () => {
   it('renders rooms', () => {
     const { queryByText } = renderMainContainer();
 
-    const contents = ['베스트 하우스 ✨', '서울시 강남구', '월세 50/3000', '채광 ☀️', '습기 💧️', '통풍 🍃'];
+    const contents = [
+      '베스트 하우스 ✨',
+      '서울시 강남구',
+      '월세 50/3000',
+      '채광 ☀️',
+      '습기 💧️',
+      '통풍 🍃',
+    ];
 
     contents.forEach((content) => {
       expect(queryByText(content)).not.toBeNull();
