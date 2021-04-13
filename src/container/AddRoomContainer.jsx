@@ -10,7 +10,7 @@ import {
   changeRoomImages,
 } from '../slice';
 
-import { get, getReadFile } from '../../utils';
+import { get, getUploadImages } from '../../utils';
 
 export default function AddRoomContainer({ onGoToMain }) {
   const addRoomFields = useSelector(get('addRoomFields'));
@@ -33,12 +33,7 @@ export default function AddRoomContainer({ onGoToMain }) {
   async function handleFileChange(event) {
     const { files } = event.target;
 
-    const getReadFilePromises = [].map.call(files, async (file) => {
-      const result = await getReadFile(file);
-      return result;
-    });
-
-    const uploadImages = await Promise.all(getReadFilePromises);
+    const uploadImages = await getUploadImages(files);
 
     dispatch(changeRoomImages(uploadImages));
   }
