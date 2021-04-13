@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,6 +12,7 @@ jest.mock('../service/api');
 
 describe('MainContainer', () => {
   const dispatch = jest.fn();
+  const handleGoToAddRoom = jest.fn();
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -29,8 +30,22 @@ describe('MainContainer', () => {
   });
 
   function renderMainContainer() {
-    return render(<MainContainer />);
+    return render(<MainContainer onGoToAddRoom={handleGoToAddRoom} />);
   }
+
+  it('renders "방등록" button', () => {
+    const { queryByText } = renderMainContainer();
+
+    expect(queryByText('방을 등록해볼까요?')).not.toBeNull();
+  });
+
+  it('calls onClick handler when "방을 등록해볼까요?" button', () => {
+    const { getByText } = renderMainContainer();
+
+    fireEvent.click(getByText('방을 등록해볼까요?'));
+
+    expect(handleGoToAddRoom).toBeCalled();
+  });
 
   it('renders rooms', () => {
     const { queryByText } = renderMainContainer();
