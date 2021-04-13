@@ -10,6 +10,7 @@ jest.mock('../service/api');
 
 describe('AddRoomContainer', () => {
   const dispatch = jest.fn();
+  const handleGoToMain = jest.fn();
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -29,7 +30,7 @@ describe('AddRoomContainer', () => {
   });
 
   function renderAddRoomContainer() {
-    return render(<AddRoomContainer />);
+    return render(<AddRoomContainer onGoToMain={handleGoToMain} />);
   }
 
   it('renders addRoom title', () => {
@@ -147,5 +148,6 @@ describe('AddRoomContainer', () => {
     fireEvent.click(getByText('등록하기'));
 
     expect(dispatch).toBeCalled();
+    expect(handleGoToMain).toBeCalled();
   });
 });

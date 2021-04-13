@@ -4,8 +4,8 @@ import {
   postLogin,
   getAuthentication,
   getRooms,
-  getReadFile,
   postRoom,
+  getSavedFileLink,
 } from './service/api';
 
 export const initialAddRoomFields = {
@@ -115,6 +115,7 @@ export const {
   changeLoginFields,
   changeAddRoomFields,
   changeRoomImages,
+  addRoom,
 } = actions;
 
 export function loginRequest() {
@@ -169,12 +170,12 @@ export function loadRooms() {
   };
 }
 
-export function addRoom() {
+export function requestAddRoom() {
   return async (dispatch, getState) => {
     const { addRoomFields } = getState();
     const { images } = addRoomFields;
 
-    const getSavedUrls = images.map((image) => getReadFile(image));
+    const getSavedUrls = images.map((image) => getSavedFileLink(image));
     const urls = await Promise.all(getSavedUrls);
 
     const fields = {
@@ -182,9 +183,10 @@ export function addRoom() {
       images: urls,
     };
 
-    postRoom(fields);
+    await postRoom(fields);
 
     dispatch(setAddRoomFields(initialAddRoomFields));
+    dispatch(loadRooms());
   };
 }
 
