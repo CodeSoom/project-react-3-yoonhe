@@ -22,7 +22,7 @@ describe('AddRoomContainer', () => {
         deposit: '',
         monthlyRent: '',
         adminCost: '',
-        images: [],
+        images: given.images || [],
       },
     }));
 
@@ -149,5 +149,23 @@ describe('AddRoomContainer', () => {
 
     expect(dispatch).toBeCalled();
     expect(handleGoToMain).toBeCalled();
+  });
+
+  context('with upload images', () => {
+    given('images', () => ['IMAGE_URL_1', 'IMAGE_URL_2']);
+    it('renders room images', () => {
+      const { queryAllByTitle } = renderAddRoomContainer();
+
+      expect(queryAllByTitle('방 사진')).toHaveLength(2);
+    });
+  });
+
+  context('without upload images', () => {
+    given('images', () => []);
+    it('renders room images', () => {
+      const { queryByTitle } = renderAddRoomContainer();
+
+      expect(queryByTitle('방 사진')).toBeNull();
+    });
   });
 });

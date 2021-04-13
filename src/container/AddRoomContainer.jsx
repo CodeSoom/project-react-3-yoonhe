@@ -63,7 +63,12 @@ export default function AddRoomContainer({ onGoToMain }) {
           <ul>
             {images.map((image) => (
               <li key={image}>
-                <img src={image} width="50px" height="50px" />
+                <img
+                  src={image}
+                  width="50px"
+                  height="50px"
+                  title="방 사진"
+                />
               </li>
             ))}
           </ul>
