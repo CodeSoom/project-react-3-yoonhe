@@ -10,9 +10,11 @@ export async function postLogin({ email, password }) {
   await authService.signInWithEmailAndPassword(email, password);
 }
 
-export async function getAuthentication(authenticationDispatches) {
-  await authService.onAuthStateChanged((user) => {
-    authenticationDispatches(user);
+export function getAuthentication() {
+  return new Promise((resolve) => {
+    authService.onAuthStateChanged((user) => {
+      resolve(user);
+    });
   });
 }
 

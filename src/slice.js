@@ -138,24 +138,15 @@ export function loginRequest() {
   };
 }
 
-export function userAuthenticationChange(user) {
-  return (dispatch) => {
-    dispatch(setFirebaseReset(false));
-    const isLoggedIn = !!user;
-    dispatch(setIsLoggedIn(isLoggedIn));
-    dispatch(setFirebaseReset(true));
-  };
-}
-
-export function firebaseAuthenticationChange(dispatch) {
-  return (user) => {
-    dispatch(userAuthenticationChange(user));
-  };
-}
-
 export function watchAuthentication() {
   return async (dispatch) => {
-    getAuthentication(firebaseAuthenticationChange(dispatch));
+    dispatch(setFirebaseReset(false));
+
+    const response = await getAuthentication();
+    const isLoggedIn = !!response;
+
+    dispatch(setIsLoggedIn(isLoggedIn));
+    dispatch(setFirebaseReset(true));
   };
 }
 
@@ -165,7 +156,7 @@ export function loadRooms() {
       const rooms = await getRooms();
       dispatch(setRooms(rooms));
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 }
