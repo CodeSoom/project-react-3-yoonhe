@@ -4,7 +4,6 @@ import configureStore from 'redux-mock-store';
 import {
   watchAuthentication,
   loginRequest,
-  userAuthenticationChange,
   loadRooms,
   initialAddRoomFields,
   requestAddRoom,
@@ -88,23 +87,13 @@ describe('actions', () => {
       store = mockStore({});
     });
 
-    it('runs setRooms', async () => {
-      await store.dispatch(watchAuthentication());
-
-      expect(getAuthentication).toBeCalled();
-    });
-  });
-
-  describe('userAuthenticationChange', () => {
-    beforeEach(() => {
-      jest.clearAllMocks();
-
-      store = mockStore({});
-    });
-
     context('with logged in', () => {
+      beforeEach(() => {
+        getAuthentication.mockResolvedValue(true);
+      });
+
       it('runs setRooms', async () => {
-        await store.dispatch(userAuthenticationChange('USER'));
+        await store.dispatch(watchAuthentication());
 
         const actions = store.getActions();
 
@@ -126,8 +115,12 @@ describe('actions', () => {
     });
 
     context('with logged out', () => {
+      beforeEach(() => {
+        getAuthentication.mockResolvedValue(null);
+      });
+
       it('runs setRooms', async () => {
-        await store.dispatch(userAuthenticationChange(null));
+        await store.dispatch(watchAuthentication());
 
         const actions = store.getActions();
 
