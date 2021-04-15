@@ -5,15 +5,15 @@ export default function SignIn({
 }) {
   const { email, password } = fields;
 
-  function handleChange(e) {
-    const { target } = e;
+  function handleChange(event) {
+    const { target } = event;
     const { name, value } = target;
 
     onChange({ name, value });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
 
     onSubmit();
   }

@@ -6,8 +6,8 @@ export default function ScoreField({
   onChange,
   scores,
 }) {
-  function handleChange({ e, score }) {
-    const { target: { name } } = e;
+  function handleChange({ event, score }) {
+    const { target: { name } } = event;
 
     onChange({ name, value: score });
   }
@@ -24,7 +24,7 @@ export default function ScoreField({
               type="radio"
               name={name}
               id={`radio-${name}-${score}`}
-              onChange={(e) => handleChange({ e, score })}
+              onChange={(event) => handleChange({ event, score })}
             />
           </span>
         ))}
