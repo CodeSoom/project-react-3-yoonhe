@@ -11,8 +11,6 @@ export default function MianPage() {
   }
 
   return (
-    <div>
-      <MainContainer onGoToAddRoom={handleGoToAddRoom} />
-    </div>
+    <MainContainer onGoToAddRoom={handleGoToAddRoom} />
   );
 }
