@@ -22,6 +22,12 @@ describe('Rooms', () => {
         expect(queryByText(category)).not.toBeNull();
       });
     });
+
+    it('renders room images', () => {
+      const { queryByAltText } = renderRooms(ROOMS);
+
+      expect(queryByAltText('방 이미지')).not.toBeNull();
+    });
   });
 
   context('without rooms', () => {
