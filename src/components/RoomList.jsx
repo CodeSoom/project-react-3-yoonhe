@@ -15,6 +15,7 @@ export default function RoomList({ rooms }) {
               lightning,
               moisture,
               ventilation,
+              images,
             } = room;
             return (
               <li key={id}>
@@ -39,6 +40,9 @@ export default function RoomList({ rooms }) {
                 <div>
                   <p>통풍 🍃</p>
                   <p>{ventilation}</p>
+                </div>
+                <div>
+                  <img src={images[0]} alt="방 이미지" />
                 </div>
               </li>
             );

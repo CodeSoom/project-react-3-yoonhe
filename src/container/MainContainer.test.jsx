@@ -69,4 +69,10 @@ describe('MainContainer', () => {
 
     expect(dispatch).toBeCalled();
   });
+
+  it('renders room images', () => {
+    const { queryByAltText } = renderMainContainer();
+
+    expect(queryByAltText('방 이미지')).not.toBeNull();
+  });
 });
