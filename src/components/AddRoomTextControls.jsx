@@ -3,8 +3,8 @@ import React from 'react';
 import TextField from './TextField';
 
 export default function AddRoomTextControls({ onChange }) {
-  function handleChange(e) {
-    const { target: { name, value } } = e;
+  function handleChange(event) {
+    const { target: { name, value } } = event;
 
     onChange({ name, value });
   }

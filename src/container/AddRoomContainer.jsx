@@ -22,8 +22,8 @@ export default function AddRoomContainer({ onGoToMain }) {
     dispatch(changeAddRoomFields({ name, value }));
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault();
 
     dispatch(requestAddRoom());
 
