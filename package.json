@@ -43,6 +43,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
     "@react-firebase/database": "^0.3.11",
     "@reduxjs/toolkit": "^1.5.1",
     "clean-webpack-plugin": "^3.0.0",

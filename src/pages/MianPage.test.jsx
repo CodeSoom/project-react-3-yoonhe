@@ -30,7 +30,7 @@ describe('MainPage', () => {
       <MainPage />
     ));
 
-    expect(queryByText('메인 페이지')).not.toBeNull();
+    expect(queryByText('Room Preview 🏠')).not.toBeNull();
   });
 
   it('routing to "Add Room" page when click "방을 등록해볼까요?" button', () => {

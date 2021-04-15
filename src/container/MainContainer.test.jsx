@@ -51,7 +51,7 @@ describe('MainContainer', () => {
     const { queryByText } = renderMainContainer();
 
     const contents = [
-      '베스트 하우스 ✨',
+      '방 구경 👀',
       '서울시 강남구',
       '월세 50/3000',
       '채광 ☀️',

@@ -28,6 +28,12 @@ describe('Rooms', () => {
 
       expect(queryByAltText('방 이미지')).not.toBeNull();
     });
+
+    it('renders "방보러 갈까요?" images', () => {
+      const { queryByText } = renderRooms(ROOMS);
+
+      expect(queryByText('방보러 갈까요?')).not.toBeNull();
+    });
   });
 
   context('without rooms', () => {
