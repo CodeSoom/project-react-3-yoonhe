@@ -43,6 +43,9 @@ export default function RoomList({ rooms }) {
                 </div>
                 <div>
                   <img src={images[0]} alt="방 이미지" />
+                  <p>
+                    <span>방보러 갈까요?</span>
+                  </p>
                 </div>
               </li>
             );

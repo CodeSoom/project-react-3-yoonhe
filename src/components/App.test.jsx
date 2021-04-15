@@ -103,7 +103,7 @@ describe('App', () => {
     const path = '/main';
     const { queryByText } = renderApp({ path });
 
-    expect(queryByText('메인 페이지')).not.toBeNull();
+    expect(queryByText('방 구경 👀')).not.toBeNull();
   });
 
   it('renders "addRoom" page', () => {
