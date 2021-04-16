@@ -25,3 +25,12 @@ export async function getUploadImages(files) {
 
   return uploadImages;
 }
+
+export function getMediaQuery(breakpoints) {
+  return breakpoints.reduce((points, point) => ({
+    ...points,
+    ...{
+      [point]: `@media (max-width: ${point}px)`,
+    },
+  }), {});
+}
