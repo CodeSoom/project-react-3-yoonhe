@@ -10,6 +10,7 @@ const rooms = [{
   moveInType: '월세',
   ventilation: 5,
   worm: 1,
+  images: ['IMAGE_URL_1', 'IMAGE_URL_2'],
 }];
 
 export default rooms;
