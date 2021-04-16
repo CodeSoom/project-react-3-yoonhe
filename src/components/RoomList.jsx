@@ -4,20 +4,21 @@ import styled from '@emotion/styled';
 
 import { getMediaQuery } from '../../utils';
 
-const breakpoints = [1100, 1200, 1600];
+const breakpoints = [1500, 1000];
 const mediaQuery = getMediaQuery(breakpoints);
 
 const List = styled.ul({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '1rem',
+  justifyContent: 'space-between',
+  gap: '2rem 0',
   marginTop: '1rem',
 });
 
 const ListItem = styled.li({
-  width: '24%',
   position: 'relative',
-  padding: '21rem 2rem 2rem 2rem',
+  padding: '2rem 2rem 2rem 26rem',
+  width: '49%',
   borderRadius: '2rem',
   background: '#fff',
   overflow: 'hidden',
@@ -26,23 +27,20 @@ const ListItem = styled.li({
     boxShadow: '0 2px 15px rgb(0 0 0 / 30%)',
     transform: 'scale(1.02)',
   },
-  [mediaQuery[1600]]: {
-    width: '32%',
+  [mediaQuery[1500]]: {
+    width: '100%',
   },
-  [mediaQuery[1200]]: {
-    width: '49%',
-  },
-  [mediaQuery[1100]]: {
-    padding: '2rem 2rem 2rem 21rem',
+  [mediaQuery[1000]]: {
+    padding: '2rem 2rem 2rem 22rem',
     width: '100%',
   },
 });
 
 const ScoreBox = styled.div({
   h3: {
-    color: '#999',
     fontSize: '1rem',
     fontWeight: 'normal',
+    color: '#999',
   },
   '& + &': {
     margin: '0.8rem 0 0 0',
@@ -72,7 +70,6 @@ const ScoreBar = styled.p({
 });
 
 const ScoreBarItem = styled.span(({ check }) => ({
-  /* background: #75A293, */
   flex: 1,
   display: 'inline-block',
   padding: '0.8rem',
@@ -87,8 +84,8 @@ const ListImage = styled.div({
   position: 'absolute',
   left: '0',
   top: '0',
-  width: '100%',
-  height: '19rem',
+  width: '24rem',
+  height: '100%',
   '& img': {
     width: '100%',
     height: '100%',
@@ -96,8 +93,8 @@ const ListImage = styled.div({
   p: {
     display: 'none',
   },
-  [mediaQuery[1100]]: {
-    width: '19rem',
+  [mediaQuery[1000]]: {
+    width: '20rem',
     height: '100%',
   },
 });
