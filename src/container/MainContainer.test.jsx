@@ -73,6 +73,6 @@ describe('MainContainer', () => {
   it('renders room images', () => {
     const { queryByAltText } = renderMainContainer();
 
-    expect(queryByAltText('방 이미지')).not.toBeNull();
+    expect(queryByAltText('방 이미지').src).toBe('http://localhost/IMAGE_URL_1');
   });
 });
