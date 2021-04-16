@@ -25,23 +25,11 @@ export default function MainContainer({ onGoToAddRoom }) {
     width: '300px',
     height: '100%',
     background: '#fff',
-    boxSizing: 'border-box',
-  });
-
-  const RightSection = styled.section({
-    position: 'fixed',
-    right: '0',
-    top: '0',
-    padding: '3rem 2rem',
-    width: '300px',
-    height: '100%',
-    background: '#fff',
-    boxSizing: 'border-box',
   });
 
   const CenterSection = styled.section({
     padding: '3rem 2rem',
-    margin: '0 300px',
+    marginLeft: '300px',
   });
 
   return (
@@ -49,17 +37,15 @@ export default function MainContainer({ onGoToAddRoom }) {
       <LeftSection>
         <div>
           <h2>Room Preview 🏠</h2>
+          <p>
+            <button type="button" onClick={onGoToAddRoom}>방을 등록해볼까요?</button>
+          </p>
         </div>
       </LeftSection>
       <CenterSection>
         <h2>방 구경 👀</h2>
         <RoomList rooms={rooms} />
       </CenterSection>
-      <RightSection>
-        <p>
-          <button type="button" onClick={onGoToAddRoom}>방을 등록해볼까요?</button>
-        </p>
-      </RightSection>
     </div>
   );
 }
