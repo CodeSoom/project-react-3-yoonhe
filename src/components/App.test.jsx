@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import { MemoryRouter } from 'react-router-dom';
 
@@ -12,6 +12,15 @@ import { email as EMAIL, password as PASSWORD } from '../../fixtures/loginFields
 
 jest.mock('react-redux');
 jest.mock('../service/api');
+
+const mockPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory() {
+    return { push: mockPush };
+  },
+}));
 
 describe('App', () => {
   const dispatch = jest.fn();
@@ -42,6 +51,14 @@ describe('App', () => {
       </MemoryRouter>
     ));
   }
+
+  it('renders navigation menu', () => {
+    const menus = ['Home', '방 등록'];
+    const path = '/App';
+    const { queryByText } = renderApp({ path });
+
+    menus.forEach((menu) => expect(queryByText(menu)).not.toBeNull());
+  });
 
   it('listens listens firebase authentication state change', () => {
     renderApp();
@@ -111,5 +128,23 @@ describe('App', () => {
     const { queryByText } = renderApp({ path });
 
     expect(queryByText('살았던 혹은 살고계신 방을 알려주세요 😊')).not.toBeNull();
+  });
+
+  it('routing to "Add Room" page when click "방 등록" button', () => {
+    const path = 'main';
+    const { getByText } = renderApp({ path });
+
+    fireEvent.click(getByText('방 등록'));
+
+    expect(mockPush).toBeCalledWith('/addRoom');
+  });
+
+  it('routing to "Home" page when click "Home" button', () => {
+    const path = 'main';
+    const { getByText } = renderApp({ path });
+
+    fireEvent.click(getByText('Home'));
+
+    expect(mockPush).toBeCalledWith('/main');
   });
 });
