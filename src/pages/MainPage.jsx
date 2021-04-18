@@ -6,11 +6,13 @@ import MainContainer from '../container/MainContainer';
 export default function MianPage() {
   const history = useHistory();
 
-  function handleGoToAddRoom() {
-    history.push('/addRoom');
+  function handlePageMove(path) {
+    history.push(path);
   }
 
   return (
-    <MainContainer onGoToAddRoom={handleGoToAddRoom} />
+    <MainContainer
+      onPageMove={handlePageMove}
+    />
   );
 }

@@ -20,7 +20,7 @@ describe('MainPage', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    dispatch.mockReset();
+    jest.clearAllMocks();
 
     useDispatch.mockImplementation(() => dispatch);
   });
@@ -33,13 +33,23 @@ describe('MainPage', () => {
     expect(queryByText('Room Preview 🏠')).not.toBeNull();
   });
 
-  it('routing to "Add Room" page when click "방을 등록해볼까요?" button', () => {
+  it('routing to "Add Room" page when click "방 등록" button', () => {
     const { getByText } = render((
       <MainPage />
     ));
 
-    fireEvent.click(getByText('방을 등록해볼까요?'));
+    fireEvent.click(getByText('방 등록'));
 
     expect(mockPush).toBeCalledWith('/addRoom');
+  });
+
+  it('routing to "Home" page when click "Home" button', () => {
+    const { getByText } = render((
+      <MainPage />
+    ));
+
+    fireEvent.click(getByText('Home'));
+
+    expect(mockPush).toBeCalledWith('/main');
   });
 });
