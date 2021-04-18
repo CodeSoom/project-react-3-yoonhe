@@ -1,8 +1,25 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
+import styled from '@emotion/styled';
+
 import Intro from '../components/Intro';
 import SignInContainer from '../container/SignInContainer';
+
+import { getMediaQuery } from '../../utils';
+
+const breakpoints = [768];
+const mediaQuery = getMediaQuery(breakpoints);
+
+const IntroContainer = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  height: '100%',
+  background: '#fff',
+  [[mediaQuery[768]]]: {
+    flexDirection: 'column',
+  },
+});
 
 export default function SignInPage() {
   const history = useHistory();
@@ -16,9 +33,9 @@ export default function SignInPage() {
   }
 
   return (
-    <>
+    <IntroContainer>
       <Intro onClick={handleSignUpClick} />
       <SignInContainer onGoToMainClick={handleGoToMainClick} />
-    </>
+    </IntroContainer>
   );
 }
