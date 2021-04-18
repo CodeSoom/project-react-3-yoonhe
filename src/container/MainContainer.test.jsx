@@ -33,29 +33,6 @@ describe('MainContainer', () => {
     return render(<MainContainer onPageMove={handlePageMove} />);
   }
 
-  it('renders navigation menu', () => {
-    const menus = ['Home', '방 등록'];
-    const { queryByText } = renderMainContainer();
-
-    menus.forEach((menu) => expect(queryByText(menu)).not.toBeNull());
-  });
-
-  it('calls onClick handler when "방 등록" button', () => {
-    const { getByText } = renderMainContainer();
-
-    fireEvent.click(getByText('방 등록'));
-
-    expect(handlePageMove).toBeCalledWith('/addRoom');
-  });
-
-  it('calls onClick handler when "Home" button', () => {
-    const { getByText } = renderMainContainer();
-
-    fireEvent.click(getByText('Home'));
-
-    expect(handlePageMove).toBeCalledWith('/main');
-  });
-
   it('renders rooms', () => {
     const { queryByText } = renderMainContainer();
 

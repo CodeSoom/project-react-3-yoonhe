@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -30,26 +30,6 @@ describe('MainPage', () => {
       <MainPage />
     ));
 
-    expect(queryByText('Room Preview 🏠')).not.toBeNull();
-  });
-
-  it('routing to "Add Room" page when click "방 등록" button', () => {
-    const { getByText } = render((
-      <MainPage />
-    ));
-
-    fireEvent.click(getByText('방 등록'));
-
-    expect(mockPush).toBeCalledWith('/addRoom');
-  });
-
-  it('routing to "Home" page when click "Home" button', () => {
-    const { getByText } = render((
-      <MainPage />
-    ));
-
-    fireEvent.click(getByText('Home'));
-
-    expect(mockPush).toBeCalledWith('/main');
+    expect(queryByText('방 구경 👀')).not.toBeNull();
   });
 });
