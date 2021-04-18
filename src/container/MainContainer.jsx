@@ -28,6 +28,7 @@ export default function MainContainer({ onPageMove }) {
 
   const MobileMenuIcon = styled.div({
     display: 'none',
+    marginBottom: '1rem',
     textAlign: 'center',
     cursor: 'pointer',
     [mediaQuery[768]]: {
@@ -55,15 +56,37 @@ export default function MainContainer({ onPageMove }) {
   const LeftSectionWrap = styled.section(({ visible }) => ({
     h2: {
       color: '#75A293',
+      textAlign: 'center',
     },
     [mediaQuery[768]]: {
       display: visible ? 'block' : 'none',
     },
   }));
 
+  const Menu = styled.ul({
+    marginTop: '1rem',
+  });
+
   const MenuItem = styled.li({
+    '& + &': {
+      marginTop: '0.3rem',
+    },
     button: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      padding: '1rem',
+      width: '100%',
       color: '#A3A1AC',
+      borderRadius: '1rem',
+      cursor: 'pointer',
+      transition: '0.3s linear',
+      '&:hover': {
+        background: '#75A293',
+        color: '#fff',
+        svg: {
+          color: '#fff !important',
+        },
+      },
     },
   });
 
@@ -93,7 +116,7 @@ export default function MainContainer({ onPageMove }) {
           <div>
             <h2>Room Preview 🏠</h2>
           </div>
-          <ul>
+          <Menu>
             <MenuItem>
               <button
                 type="button"
@@ -116,7 +139,7 @@ export default function MainContainer({ onPageMove }) {
                 </span>
               </button>
             </MenuItem>
-          </ul>
+          </Menu>
         </LeftSectionWrap>
       </LeftSection>
       <CenterSection>
