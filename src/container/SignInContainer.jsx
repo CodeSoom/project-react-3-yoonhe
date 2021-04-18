@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import styled from '@emotion/styled';
+
 import SignIn from '../components/SignIn';
 
 import {
@@ -8,7 +10,29 @@ import {
   loginRequest,
 } from '../slice';
 
-import { get } from '../../utils';
+import { get, getMediaQuery } from '../../utils';
+
+const breakpoints = [1000, 768];
+const mediaQuery = getMediaQuery(breakpoints);
+
+const SignInSection = styled.section({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flex: '1.5',
+  padding: '2rem 10rem',
+  width: '100%',
+  textAlign: 'center',
+  '& > div': {
+    width: '100%',
+  },
+  [mediaQuery[1000]]: {
+    padding: '2rem 3rem',
+  },
+  [mediaQuery[768]]: {
+    flex: 3,
+  },
+});
 
 export default function SignInContainer({ onGoToMainClick }) {
   const dispatch = useDispatch();
@@ -32,12 +56,16 @@ export default function SignInContainer({ onGoToMainClick }) {
   }
 
   return (
-    <SignIn
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-      onClick={onGoToMainClick}
-      fields={loginFields}
-      loginError={loginError}
-    />
+    <SignInSection>
+      <div>
+        <SignIn
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          onClick={onGoToMainClick}
+          fields={loginFields}
+          loginError={loginError}
+        />
+      </div>
+    </SignInSection>
   );
 }
