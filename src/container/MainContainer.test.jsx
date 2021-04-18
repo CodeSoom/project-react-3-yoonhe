@@ -12,7 +12,7 @@ jest.mock('../service/api');
 
 describe('MainContainer', () => {
   const dispatch = jest.fn();
-  const handleGoToAddRoom = jest.fn();
+  const handlePageMove = jest.fn();
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -30,21 +30,30 @@ describe('MainContainer', () => {
   });
 
   function renderMainContainer() {
-    return render(<MainContainer onGoToAddRoom={handleGoToAddRoom} />);
+    return render(<MainContainer onPageMove={handlePageMove} />);
   }
 
-  it('renders "방등록" button', () => {
+  it('renders navigation menu', () => {
+    const menus = ['Home', '방 등록'];
     const { queryByText } = renderMainContainer();
 
-    expect(queryByText('방을 등록해볼까요?')).not.toBeNull();
+    menus.forEach((menu) => expect(queryByText(menu)).not.toBeNull());
   });
 
-  it('calls onClick handler when "방을 등록해볼까요?" button', () => {
+  it('calls onClick handler when "방 등록" button', () => {
     const { getByText } = renderMainContainer();
 
-    fireEvent.click(getByText('방을 등록해볼까요?'));
+    fireEvent.click(getByText('방 등록'));
 
-    expect(handleGoToAddRoom).toBeCalled();
+    expect(handlePageMove).toBeCalledWith('/addRoom');
+  });
+
+  it('calls onClick handler when "Home" button', () => {
+    const { getByText } = renderMainContainer();
+
+    fireEvent.click(getByText('Home'));
+
+    expect(handlePageMove).toBeCalledWith('/main');
   });
 
   it('renders rooms', () => {

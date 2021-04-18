@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 import { getMediaQuery } from '../../utils';
 
-const breakpoints = [1500, 1000];
+const breakpoints = [1500, 1000, 500];
 const mediaQuery = getMediaQuery(breakpoints);
 
 const List = styled.ul({
@@ -33,6 +33,9 @@ const ListItem = styled.li({
   [mediaQuery[1000]]: {
     padding: '2rem 2rem 2rem 22rem',
     width: '100%',
+  },
+  [mediaQuery[500]]: {
+    padding: '16.5rem 1.5rem 1.5rem 1.5rem',
   },
 });
 
@@ -97,6 +100,10 @@ const ListImage = styled.div({
     width: '20rem',
     height: '100%',
   },
+  [mediaQuery[500]]: {
+    height: '15rem',
+    width: '100%',
+  },
 });
 
 export default function RoomList({ rooms }) {
@@ -122,13 +129,15 @@ export default function RoomList({ rooms }) {
               <ListItem key={id}>
                 <ScoreTop>
                   <em>{moveInType}</em>
-                  <span>{address}</span>
-                  <span>
-                    {' '}
-                    {monthlyRent}
-                    /
-                    {deposit}
-                  </span>
+                  <div>
+                    <span>{address}</span>
+                    <span>
+                      {' '}
+                      {monthlyRent}
+                      /
+                      {deposit}
+                    </span>
+                  </div>
                 </ScoreTop>
                 <ScoreBox>
                   <h3>채광 ☀️</h3>
