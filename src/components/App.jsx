@@ -100,6 +100,7 @@ const CenterSection = styled.section({
   marginLeft: '250px',
   [mediaQuery[768]]: {
     marginLeft: 'auto',
+    padding: '4rem 1.1rem',
   },
 });
 

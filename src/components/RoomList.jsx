@@ -13,6 +13,9 @@ const List = styled.ul({
   justifyContent: 'space-between',
   gap: '2rem 0',
   marginTop: '1rem',
+  [mediaQuery[500]]: {
+    gap: '0',
+  },
 });
 
 const ListItem = styled.li({
@@ -36,6 +39,9 @@ const ListItem = styled.li({
   },
   [mediaQuery[500]]: {
     padding: '16.5rem 1.5rem 1.5rem 1.5rem',
+    '&+&': {
+      marginTop: '1.5rem',
+    },
   },
 });
 
