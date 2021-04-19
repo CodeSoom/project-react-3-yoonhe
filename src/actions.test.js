@@ -39,17 +39,44 @@ describe('actions', () => {
       });
     });
 
-    it('runs setIsLoggedIn with false', async () => {
-      await store.dispatch(loginRequest());
+    context('when login success', () => {
+      beforeEach(() => {
+        postLogin.mockResolvedValue('USER_INFOMATION');
+      });
 
-      const actions = store.getActions();
+      it('runs setIsLoggedIn', async () => {
+        await store.dispatch(loginRequest());
 
-      expect(actions).toEqual([
-        {
-          type: 'roomPreviews/setIsLoginError',
-          payload: '계정을 찾을 수 없습니다 👀',
-        },
-      ]);
+        const actions = store.getActions();
+
+        expect(actions).toEqual([
+          {
+            type: 'roomPreviews/setIsLoggedIn',
+            payload: true,
+          },
+        ]);
+      });
+    });
+
+    context('when login failure', () => {
+      beforeEach(() => {
+        postLogin.mockRejectedValue({
+          code: 'auth/user-not-found',
+        });
+      });
+
+      it('runs setIsLoggedIn with false', async () => {
+        await store.dispatch(loginRequest());
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([
+          {
+            type: 'roomPreviews/setIsLoginError',
+            payload: '계정을 찾을 수 없습니다 👀',
+          },
+        ]);
+      });
     });
   });
 

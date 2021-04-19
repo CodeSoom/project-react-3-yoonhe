@@ -125,6 +125,7 @@ export function loginRequest() {
 
     try {
       await postLogin({ email, password });
+      dispatch(setIsLoggedIn(true));
     } catch (error) {
       const errors = {
         'auth/user-not-found': '계정을 찾을 수 없습니다 👀',
