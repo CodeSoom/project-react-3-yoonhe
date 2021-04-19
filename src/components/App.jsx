@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from '@emotion/styled';
 
 import { TiThMenu } from 'react-icons/ti';
-import { CgCloseO } from 'react-icons/cg';
 import { FiCircle } from 'react-icons/fi';
+import { FaTimes } from 'react-icons/fa';
 
 import MianPage from '../pages/MainPage';
 import SignInPage from '../pages/SignInPage';
@@ -18,15 +18,25 @@ import { get, getMediaQuery } from '../../utils';
 const breakpoints = [1500, 1000, 768];
 const mediaQuery = getMediaQuery(breakpoints);
 
-const MobileMenuIcon = styled.div({
+const MobileMenuIcon = styled.div(({ visible }) => ({
+  position: 'absolute',
+  right: '1rem',
+  top: '1rem',
   display: 'none',
-  marginBottom: '1rem',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginBottom: visible && '1rem',
+  width: '50px',
+  height: '50px',
+  borderRadius: !visible && '50%',
   textAlign: 'center',
   cursor: 'pointer',
+  background: !visible && '#fff',
+  boxShadow: !visible && '0 4px 18px rgba(0,0,0,0.2)',
   [mediaQuery[768]]: {
-    display: 'block',
+    display: 'flex',
   },
-});
+}));
 
 const LeftSection = styled.section(({ visible }) => ({
   position: 'fixed',
@@ -36,11 +46,15 @@ const LeftSection = styled.section(({ visible }) => ({
   width: '250px',
   height: '100%',
   background: '#fff',
-  transition: '0.3s linear',
   [mediaQuery[768]]: {
-    padding: !visible && '3rem 0',
+    left: 'initial',
+    right: '0',
+    top: '0',
+    padding: visible ? '5rem 1rem' : '0',
+    height: !visible && 'auto',
     width: !visible && '70px',
-    boxShadow: visible && '10px 0px 20px rgba(0,0,0,0.3)',
+    boxShadow: visible && '-10px 0px 20px rgba(0,0,0,0.3)',
+    background: !visible && 'none',
     zIndex: 2,
   },
 }));
@@ -82,18 +96,17 @@ const MenuItem = styled.li({
 });
 
 const CenterSection = styled.section({
-  padding: '3rem 2rem',
+  padding: '4rem 2rem',
   marginLeft: '250px',
   [mediaQuery[768]]: {
     marginLeft: 'auto',
-    width: 'calc(100% - 70px)',
   },
 });
 
 export default function App() {
   const history = useHistory();
 
-  const [menuVisible, setMenuVisible] = useState(true);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const isLoggedIn = useSelector(get('isLoggedIn'));
 
@@ -117,9 +130,9 @@ export default function App() {
         <Route exact path="/" component={SignInPage} />
         <>
           <LeftSection visible={menuVisible}>
-            <MobileMenuIcon onClick={handleMobileIconClick}>
+            <MobileMenuIcon onClick={handleMobileIconClick} visible={menuVisible}>
               {
-            menuVisible ? <CgCloseO size="25px" color="75A293" />
+            menuVisible ? <FaTimes size="25px" color="75A293" />
               : <TiThMenu size="25px" color="75A293" />
           }
             </MobileMenuIcon>
