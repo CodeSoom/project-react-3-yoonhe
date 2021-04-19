@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styled from '@emotion/styled';
 
@@ -13,7 +13,7 @@ import SignInPage from '../pages/SignInPage';
 import AddRoomPage from '../pages/AddRoomPage';
 
 import { watchAuthentication } from '../slice';
-import { getMediaQuery } from '../../utils';
+import { get, getMediaQuery } from '../../utils';
 
 const breakpoints = [1500, 1000, 768];
 const mediaQuery = getMediaQuery(breakpoints);
@@ -95,6 +95,8 @@ export default function App() {
 
   const [menuVisible, setMenuVisible] = useState(true);
 
+  const isLoggedIn = useSelector(get('isLoggedIn'));
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -147,6 +149,28 @@ export default function App() {
                       <FiCircle color="#A3A1AC" />
                     </span>
                   </button>
+                </MenuItem>
+                <MenuItem>
+                  {isLoggedIn ? (
+                    <button
+                      type="button"
+                    >
+                      로그아웃
+                      <span>
+                        <FiCircle color="#A3A1AC" />
+                      </span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handlePageMove('/')}
+                    >
+                      로그인
+                      <span>
+                        <FiCircle color="#A3A1AC" />
+                      </span>
+                    </button>
+                  )}
                 </MenuItem>
               </Menu>
             </LeftSectionWrap>
