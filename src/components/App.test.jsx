@@ -31,7 +31,7 @@ describe('App', () => {
         email: EMAIL,
         password: PASSWORD,
       },
-      isLoggedIn: false,
+      isLoggedIn: given.isLoggedIn || false,
       addRoomFields: {
         address: '',
         moveInType: '',
@@ -52,6 +52,35 @@ describe('App', () => {
     ));
   }
 
+  context('when logged in', () => {
+    given('isLoggedIn', () => true);
+    it('renders "로그아웃" menu', () => {
+      const path = '/App';
+      const { queryByText } = renderApp({ path });
+
+      expect(queryByText('로그아웃')).not.toBeNull();
+    });
+  });
+
+  context('when logged out', () => {
+    given('isLoggedIn', () => false);
+    it('renders "로그인" menu', () => {
+      const path = '/App';
+      const { queryByText } = renderApp({ path });
+
+      expect(queryByText('로그인')).not.toBeNull();
+    });
+
+    it('routing to "sign in" page when click "로그인" button', () => {
+      const path = '/main';
+      const { getByText } = renderApp({ path });
+
+      fireEvent.click(getByText('로그인'));
+
+      expect(mockPush).toBeCalledWith('/');
+    });
+  });
+
   it('renders navigation menu', () => {
     const menus = ['Home', '방 등록'];
     const path = '/App';
@@ -60,53 +89,10 @@ describe('App', () => {
     menus.forEach((menu) => expect(queryByText(menu)).not.toBeNull());
   });
 
-  it('listens listens firebase authentication state change', () => {
+  it('listens firebase authentication state change', () => {
     renderApp();
 
     expect(dispatch).toBeCalled();
-  });
-
-  it('renders welcome messages and service Introduction', () => {
-    const { queryByText } = renderApp();
-
-    expect(queryByText('Welcome, RoomPreview!')).not.toBeNull();
-    expect(queryByText('이 서비스는 여러분이 살고싶은 집에 미리 살아본 사람들의 경험담을 공유하여 여러분이 후회없는 선택을 할 수 있도록 도와줍니다')).not.toBeNull();
-  });
-
-  it('renders "회원가입" button', () => {
-    const { queryByText } = renderApp();
-
-    expect(queryByText('회원가입')).not.toBeNull();
-  });
-
-  it('renders "Room Preview" Logo', () => {
-    const { queryByText } = renderApp();
-
-    expect(queryByText('Room Preview 🏠')).not.toBeNull();
-  });
-
-  it('renders Email field', () => {
-    const { queryByPlaceholderText } = renderApp();
-
-    expect(queryByPlaceholderText('Email')).not.toBeNull();
-  });
-
-  it('renders Password field', () => {
-    const { queryByPlaceholderText } = renderApp();
-
-    expect(queryByPlaceholderText('Password')).not.toBeNull();
-  });
-
-  it('renders "방보러 가볼까요?" button', () => {
-    const { queryByText } = renderApp();
-
-    expect(queryByText('방보러 가볼까요? 👉🏻')).not.toBeNull();
-  });
-
-  it('renders "로그인 없이 구경하기" button', () => {
-    const { queryByText } = renderApp();
-
-    expect(queryByText('로그인 없이 구경하기 👀')).not.toBeNull();
   });
 
   it('renders "회원가입" page', () => {
@@ -131,7 +117,7 @@ describe('App', () => {
   });
 
   it('routing to "Add Room" page when click "방 등록" button', () => {
-    const path = 'main';
+    const path = '/main';
     const { getByText } = renderApp({ path });
 
     fireEvent.click(getByText('방 등록'));
@@ -140,7 +126,7 @@ describe('App', () => {
   });
 
   it('routing to "Home" page when click "Home" button', () => {
-    const path = 'main';
+    const path = '/main';
     const { getByText } = renderApp({ path });
 
     fireEvent.click(getByText('Home'));
