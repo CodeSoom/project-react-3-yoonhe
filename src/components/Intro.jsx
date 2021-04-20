@@ -28,18 +28,18 @@ const Description = styled.p({
   lineHeight: '1.7',
 });
 
-// const ButtonBox = styled.p({
-//   marginTop: '2rem',
-//   padding: '0 2rem',
-//   button: {
-//     fontSize: '1.3rem',
-//     padding: '0.8em',
-//     width: '100%',
-//     borderRadius: '2rem',
-//     color: '#fff',
-//     border: '1px solid #fff',
-//   },
-// });
+const ButtonBox = styled.p({
+  marginTop: '2rem',
+  padding: '0 2rem',
+  button: {
+    fontSize: '1.3rem',
+    padding: '0.8em',
+    width: '100%',
+    borderRadius: '2rem',
+    color: '#fff',
+    border: '1px solid #fff',
+  },
+});
 
 export default function Intro({ onClick }) {
   return (
@@ -49,15 +49,15 @@ export default function Intro({ onClick }) {
         <Description>
           이 서비스는 여러분이 살고싶은 집에 미리 살아본 사람들의 경험담을 공유하여 여러분이 후회없는 선택을 할 수 있도록 도와줍니다
         </Description>
-        {/* <ButtonBox>
+        <ButtonBox>
           <button
             type="button"
-            onClick={onClick}
+            onClick={() => onClick('/signup')}
           >
             회원가입
 
           </button>
-        </ButtonBox> */}
+        </ButtonBox>
       </div>
     </IntroSection>
   );

@@ -96,7 +96,7 @@ describe('App', () => {
   });
 
   it('renders "회원가입" page', () => {
-    const path = '/signup';
+    const path = '/signUp';
     const { queryByText } = renderApp({ path });
 
     expect(queryByText('회원가입')).not.toBeNull();

@@ -11,6 +11,7 @@ import { FaTimes } from 'react-icons/fa';
 import MianPage from '../pages/MainPage';
 import SignInPage from '../pages/SignInPage';
 import AddRoomPage from '../pages/AddRoomPage';
+import SignUpPage from '../pages/SignUpPage';
 
 import { watchAuthentication } from '../slice';
 import { get, getMediaQuery } from '../../utils';
@@ -129,6 +130,7 @@ export default function App() {
     <>
       <Switch>
         <Route exact path="/" component={SignInPage} />
+        <Route exact path="/signUp" component={SignUpPage} />
         <>
           <LeftSection visible={menuVisible}>
             <MobileMenuIcon onClick={handleMobileIconClick} visible={menuVisible}>
