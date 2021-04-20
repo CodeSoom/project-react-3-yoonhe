@@ -8,6 +8,10 @@ import reducer, {
   changeAddRoomFields,
   changeRoomImages,
   initialAddRoomFields,
+  changeSignInFields,
+  setSignInRequest,
+  setSignInSuccess,
+  setSignInFailure,
 } from './slice';
 
 import { email as EMAIL } from '../fixtures/loginFields';
@@ -24,6 +28,15 @@ describe('reducer', () => {
       loginFields: {
         email: '',
         password: '',
+      },
+      signInFields: {
+        email: '',
+        password: '',
+      },
+      signIn: {
+        loading: false,
+        success: false,
+        failure: false,
       },
       rooms: [],
       addRoomFields: {
@@ -159,6 +172,79 @@ describe('reducer', () => {
 
       expect(state.loginFields.email).toBe(EMAIL);
       expect(state.loginFields.password).toBe('');
+    });
+  });
+
+  describe('changeSignInFields', () => {
+    it('change signInFields', () => {
+      const initialState = {
+        signInFields: {
+          email: '',
+          password: '',
+        },
+      };
+
+      const state = reducer(initialState, changeSignInFields({
+        name: 'email',
+        value: EMAIL,
+      }));
+
+      expect(state.signInFields.email).toBe(EMAIL);
+      expect(state.signInFields.password).toBe('');
+    });
+  });
+
+  describe('siginInRequest', () => {
+    it('change signIn loading', () => {
+      const initialState = {
+        signIn: {
+          loading: false,
+          success: false,
+          failure: false,
+        },
+      };
+
+      const state = reducer(initialState, setSignInRequest());
+
+      expect(state.signIn.loading).toBe(true);
+      expect(state.signIn.success).toBe(false);
+      expect(state.signIn.failure).toBe(false);
+    });
+  });
+
+  describe('setSignInSuccess', () => {
+    it('change signIn loading and success', () => {
+      const initialState = {
+        signIn: {
+          loading: true,
+          success: false,
+          failure: 'ERROR_MESSAGE',
+        },
+      };
+
+      const state = reducer(initialState, setSignInSuccess());
+
+      expect(state.signIn.loading).toBe(false);
+      expect(state.signIn.success).toBe(true);
+      expect(state.signIn.failure).toBe(false);
+    });
+  });
+
+  describe('setSignInFailure', () => {
+    it('change signIn loading and failure', () => {
+      const initialState = {
+        signIn: {
+          loading: true,
+          success: false,
+          failure: false,
+        },
+      };
+
+      const state = reducer(initialState, setSignInFailure('ERROR_MESSAGE'));
+
+      expect(state.signIn.loading).toBe(false);
+      expect(state.signIn.success).toBe(false);
+      expect(state.signIn.failure).toBe('ERROR_MESSAGE');
     });
   });
 });

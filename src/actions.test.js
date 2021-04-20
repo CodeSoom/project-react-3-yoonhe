@@ -7,12 +7,14 @@ import {
   loadRooms,
   initialAddRoomFields,
   requestAddRoom,
+  signInRequest,
 } from './slice';
 
 import {
   getRooms,
   postLogin,
   getAuthentication,
+  postSignup,
 } from './service/api';
 
 const middlewares = getDefaultMiddleware();
@@ -32,10 +34,6 @@ describe('actions', () => {
           email: 'tester@example.com',
           password: 'test',
         },
-      });
-
-      postLogin.mockRejectedValue({
-        code: 'auth/user-not-found',
       });
     });
 
@@ -74,6 +72,64 @@ describe('actions', () => {
           {
             type: 'roomPreviews/setIsLoginError',
             payload: '계정을 찾을 수 없습니다 👀',
+          },
+        ]);
+      });
+    });
+  });
+
+  describe('signInRequest', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      store = mockStore({
+        signInFields: {
+          email: 'tester@example.com',
+          password: 'test',
+        },
+      });
+    });
+
+    context('when signin success', () => {
+      beforeEach(() => {
+        postSignup.mockResolvedValue();
+      });
+
+      it('runs setIsLoggedIn', async () => {
+        await store.dispatch(signInRequest());
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([
+          {
+            type: 'roomPreviews/setSignInRequest',
+          },
+          {
+            type: 'roomPreviews/setSignInSuccess',
+          },
+        ]);
+      });
+    });
+
+    context('when signin failure', () => {
+      beforeEach(() => {
+        postSignup.mockRejectedValue({
+          code: 'auth/email-already-in-use',
+        });
+      });
+
+      it('runs setIsLoggedIn with false', async () => {
+        await store.dispatch(signInRequest());
+
+        const actions = store.getActions();
+
+        expect(actions).toEqual([
+          {
+            type: 'roomPreviews/setSignInRequest',
+          },
+          {
+            type: 'roomPreviews/setSignInFailure',
+            payload: '이미 사용중인 메일입니다 👀',
           },
         ]);
       });

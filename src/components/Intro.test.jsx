@@ -32,6 +32,6 @@ describe('Intro', () => {
 
     fireEvent.click(getByText('회원가입'));
 
-    expect(handleClick).toBeCalled();
+    expect(handleClick).toBeCalledWith('/signup');
   });
 });

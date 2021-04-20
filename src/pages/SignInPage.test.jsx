@@ -25,6 +25,7 @@ describe('SignInPage', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
+    jest.clearAllMocks();
     useSelector.mockImplementation((selector) => selector({
       loginFields: {
         email: EMAIL,

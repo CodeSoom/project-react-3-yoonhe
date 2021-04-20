@@ -24,18 +24,14 @@ const IntroContainer = styled.div({
 export default function SignInPage() {
   const history = useHistory();
 
-  function handleSignUpClick() {
-    history.push('/signup');
-  }
-
-  function handleGoToMainClick() {
-    history.push('/main');
+  function handlePageMove(path) {
+    history.push(path);
   }
 
   return (
     <IntroContainer>
-      <Intro onClick={handleSignUpClick} />
-      <SignInContainer onGoToMainClick={handleGoToMainClick} />
+      <Intro onClick={handlePageMove} />
+      <SignInContainer onGoToMainClick={handlePageMove} />
     </IntroContainer>
   );
 }

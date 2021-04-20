@@ -2,8 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { authService, dbService, storageService } from './firebase';
 
-export function postSignup({ email, password }) {
-  authService.createUserWithEmailAndPassword(email, password);
+export async function postSignup({ email, password }) {
+  await authService.createUserWithEmailAndPassword(email, password);
 }
 
 export async function postLogin({ email, password }) {

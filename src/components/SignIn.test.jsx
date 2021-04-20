@@ -123,6 +123,6 @@ describe('SignIn', () => {
 
     fireEvent.click(queryByText('로그인 없이 구경하기 👀'));
 
-    expect(handleClick).toBeCalled();
+    expect(handleClick).toBeCalledWith('/main');
   });
 });
