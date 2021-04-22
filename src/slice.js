@@ -189,6 +189,7 @@ export function loginRequest() {
       dispatch(setIsLoggedIn(true));
     } catch (error) {
       const errors = {
+        'auth/invalid-email': '이메일을 입력해주세요 👀',
         'auth/user-not-found': '계정을 찾을 수 없습니다 👀',
         'auth/wrong-password': '비밀번호가 틀렸습니다 👀',
       };
@@ -210,6 +211,7 @@ export function signInRequest() {
       dispatch(setSignInSuccess());
     } catch (error) {
       const errors = {
+        'auth/invalid-email': '이메일을 입력해주세요 👀',
         'auth/email-already-in-use': '이미 사용중인 메일입니다 👀',
         'auth/weak-password': '비밀번호는 여섯자리가 넘어야합니다 👀',
       };

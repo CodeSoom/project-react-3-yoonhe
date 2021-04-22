@@ -17,3 +17,8 @@ export const Input = styled.input({
     marginTop: '1rem',
   },
 });
+
+export const ErrorMessage = styled.p({
+  marginTop: '1rem',
+  textAlign: 'center',
+});

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { fireEvent, render } from '@testing-library/react';
 
@@ -18,15 +18,32 @@ describe('SignUpContainer', () => {
 
   beforeEach(() => {
     jest.resetAllMocks();
+    useDispatch.mockImplementation(() => dispatch);
+    useSelector.mockImplementation((selector) => selector({
+      loginFields: {
+        email: EMAIL,
+        password: PASSWORD,
+      },
+      signIn: {
+        loading: false,
+        success: false,
+        failure: given.signinFailure || false,
+      },
+      isLoggedIn: given.isLoggedIn || false,
+      addRoomFields: {
+        address: '',
+        moveInType: '',
+        deposit: '',
+        monthlyRent: '',
+        adminCost: '',
+        images: [],
+      },
+    }));
   });
 
   function renderSignUpContainer() {
     return render(<SignUpContainer />);
   }
-
-  beforeEach(() => {
-    useDispatch.mockImplementation(() => dispatch);
-  });
 
   it('renders Email field', () => {
     const { queryByPlaceholderText } = renderSignUpContainer();
@@ -88,5 +105,25 @@ describe('SignUpContainer', () => {
     fireEvent.click(getByText('완료'));
 
     expect(dispatch).toBeCalled();
+  });
+
+  context('with sign in error', () => {
+    given('signinFailure', () => 'ERROR_MESSAGE');
+
+    it('renders error messages', () => {
+      const { queryByText } = renderSignUpContainer();
+
+      expect(queryByText('ERROR_MESSAGE')).not.toBeNull();
+    });
+  });
+
+  context('without sign in error', () => {
+    given('signinFailure', () => false);
+
+    it('renders error messages', () => {
+      const { queryByText } = renderSignUpContainer();
+
+      expect(queryByText('ERROR_MESSAGE')).toBeNull();
+    });
   });
 });

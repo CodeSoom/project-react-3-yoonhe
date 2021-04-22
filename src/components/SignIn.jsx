@@ -19,12 +19,9 @@ const Logo = styled.h1({
   },
 });
 
-const ErrorMessage = styled.p({
-  marginTop: '1rem',
-});
-
 export default function SignIn({
-  onChange, onSubmit, onClick, fields, loginError,
+  fields, loginError,
+  onChange, onSubmit, onClick,
 }) {
   const { email, password } = fields;
 
@@ -59,7 +56,11 @@ export default function SignIn({
           value={password}
           onChange={handleChange}
         />
-        {loginError && <ErrorMessage>{loginError}</ErrorMessage> }
+        {loginError && (
+        <FormStyle.ErrorMessage>
+          {loginError}
+        </FormStyle.ErrorMessage>
+        ) }
         <ButtonStyle.ButtonBox>
           <ButtonStyle.Button type="submit">방보러 가볼까요? 👉🏻</ButtonStyle.Button>
           <ButtonStyle.Button
