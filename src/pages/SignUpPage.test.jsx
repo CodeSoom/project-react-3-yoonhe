@@ -13,6 +13,15 @@ import {
 jest.mock('react-redux');
 jest.mock('../service/api');
 
+const mockPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory() {
+    return { push: mockPush };
+  },
+}));
+
 describe('SignUpPage', () => {
   beforeEach(() => {
     jest.resetAllMocks();

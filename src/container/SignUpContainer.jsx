@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { get } from '../../utils';
 
 import SignUp from '../components/SignUp';
 
-import { changeSignInFields, signInRequest } from '../slice';
+import { changeSignInFields, signUpRequest } from '../slice';
 
-export default function SignUpContainer() {
+export default function SignUpContainer({ onPageMove }) {
   const dispatch = useDispatch();
 
-  const { failure } = useSelector(get('signIn'));
+  const { failure, success } = useSelector(get('signUp'));
+
+  useEffect(() => {
+    if (success) { onPageMove('/main'); }
+  }, [success]);
 
   function handleChange({ name, value }) {
     dispatch(changeSignInFields({ name, value }));
@@ -17,7 +22,7 @@ export default function SignUpContainer() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(signInRequest());
+    dispatch(signUpRequest());
   }
 
   return (
