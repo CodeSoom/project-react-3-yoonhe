@@ -32,6 +32,11 @@ describe('App', () => {
         password: PASSWORD,
       },
       isLoggedIn: given.isLoggedIn || false,
+      signIn: {
+        loading: false,
+        success: false,
+        failure: false,
+      },
       addRoomFields: {
         address: '',
         moveInType: '',

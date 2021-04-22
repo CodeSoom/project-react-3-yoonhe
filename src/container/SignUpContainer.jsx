@@ -1,5 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { get } from '../../utils';
 
 import SignUp from '../components/SignUp';
 
@@ -7,6 +8,8 @@ import { changeSignInFields, signInRequest } from '../slice';
 
 export default function SignUpContainer() {
   const dispatch = useDispatch();
+
+  const { failure } = useSelector(get('signIn'));
 
   function handleChange({ name, value }) {
     dispatch(changeSignInFields({ name, value }));
@@ -21,6 +24,7 @@ export default function SignUpContainer() {
     <SignUp
       onChange={handleChange}
       onSubmit={handleSubmit}
+      error={failure}
     />
   );
 }

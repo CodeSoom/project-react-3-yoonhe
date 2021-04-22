@@ -18,6 +18,7 @@ describe('SignUp', () => {
     return render(<SignUp
       onChange={handleChange}
       onSubmit={handleSubmit}
+      error={given.error || false}
     />);
   }
 
@@ -78,5 +79,25 @@ describe('SignUp', () => {
     fireEvent.submit(getByText('완료'));
 
     expect(handleSubmit).toBeCalled();
+  });
+
+  context('with sign in error', () => {
+    given('error', () => 'ERROR_MESSAGE');
+
+    it('renders error message', () => {
+      const { queryByText } = renderSignUp();
+
+      expect(queryByText('ERROR_MESSAGE')).not.toBeNull();
+    });
+  });
+
+  context('without sign in error', () => {
+    given('error', () => false);
+
+    it("doesn't renders error message", () => {
+      const { queryByText } = renderSignUp();
+
+      expect(queryByText('ERROR_MESSAGE')).toBeNull();
+    });
   });
 });

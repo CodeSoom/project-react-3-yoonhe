@@ -3,7 +3,7 @@ import React from 'react';
 import * as FormStyle from '../styles/form';
 import * as ButtonStyle from '../styles/button';
 
-export default function SignUp({ onChange, onSubmit }) {
+export default function SignUp({ onChange, onSubmit, error }) {
   function handleChange(event) {
     const { target } = event;
     const { name, value } = target;
@@ -26,6 +26,11 @@ export default function SignUp({ onChange, onSubmit }) {
           placeholder="Password"
           onChange={handleChange}
         />
+        {error && (
+        <FormStyle.ErrorMessage>
+          {error}
+        </FormStyle.ErrorMessage>
+        )}
         <ButtonStyle.ButtonBox>
           <ButtonStyle.Button
             type="submit"
