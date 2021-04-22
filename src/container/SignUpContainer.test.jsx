@@ -24,7 +24,7 @@ describe('SignUpContainer', () => {
         email: EMAIL,
         password: PASSWORD,
       },
-      signIn: {
+      signUp: {
         loading: false,
         success: false,
         failure: given.signinFailure || false,

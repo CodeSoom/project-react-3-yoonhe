@@ -9,9 +9,9 @@ import reducer, {
   changeRoomImages,
   initialAddRoomFields,
   changeSignInFields,
-  setSignInRequest,
-  setSignInSuccess,
-  setSignInFailure,
+  setSignUpRequest,
+  setSignUpSuccess,
+  setSignUpFailure,
 } from './slice';
 
 import { email as EMAIL } from '../fixtures/loginFields';
@@ -33,7 +33,7 @@ describe('reducer', () => {
         email: '',
         password: '',
       },
-      signIn: {
+      signUp: {
         loading: false,
         success: false,
         failure: false,
@@ -197,54 +197,54 @@ describe('reducer', () => {
   describe('siginInRequest', () => {
     it('change signIn loading', () => {
       const initialState = {
-        signIn: {
+        signUp: {
           loading: false,
           success: false,
           failure: false,
         },
       };
 
-      const state = reducer(initialState, setSignInRequest());
+      const state = reducer(initialState, setSignUpRequest());
 
-      expect(state.signIn.loading).toBe(true);
-      expect(state.signIn.success).toBe(false);
-      expect(state.signIn.failure).toBe(false);
+      expect(state.signUp.loading).toBe(true);
+      expect(state.signUp.success).toBe(false);
+      expect(state.signUp.failure).toBe(false);
     });
   });
 
-  describe('setSignInSuccess', () => {
+  describe('setSignUpSuccess', () => {
     it('change signIn loading and success', () => {
       const initialState = {
-        signIn: {
+        signUp: {
           loading: true,
           success: false,
           failure: 'ERROR_MESSAGE',
         },
       };
 
-      const state = reducer(initialState, setSignInSuccess());
+      const state = reducer(initialState, setSignUpSuccess());
 
-      expect(state.signIn.loading).toBe(false);
-      expect(state.signIn.success).toBe(true);
-      expect(state.signIn.failure).toBe(false);
+      expect(state.signUp.loading).toBe(false);
+      expect(state.signUp.success).toBe(true);
+      expect(state.signUp.failure).toBe(false);
     });
   });
 
-  describe('setSignInFailure', () => {
+  describe('setSignUpFailure', () => {
     it('change signIn loading and failure', () => {
       const initialState = {
-        signIn: {
+        signUp: {
           loading: true,
           success: false,
           failure: false,
         },
       };
 
-      const state = reducer(initialState, setSignInFailure('ERROR_MESSAGE'));
+      const state = reducer(initialState, setSignUpFailure('ERROR_MESSAGE'));
 
-      expect(state.signIn.loading).toBe(false);
-      expect(state.signIn.success).toBe(false);
-      expect(state.signIn.failure).toBe('ERROR_MESSAGE');
+      expect(state.signUp.loading).toBe(false);
+      expect(state.signUp.success).toBe(false);
+      expect(state.signUp.failure).toBe('ERROR_MESSAGE');
     });
   });
 });
