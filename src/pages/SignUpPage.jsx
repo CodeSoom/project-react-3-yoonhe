@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import styeld from '@emotion/styled';
 
@@ -28,11 +29,17 @@ const Title = styeld.h2({
 });
 
 export default function SignUpPage() {
+  const history = useHistory();
+
+  function handlePageMove(path) {
+    history.push(path);
+  }
+
   return (
     <Section>
       <Inner>
         <Title>회원가입</Title>
-        <SignUpContainer />
+        <SignUpContainer onPageMove={handlePageMove} />
       </Inner>
     </Section>
   );

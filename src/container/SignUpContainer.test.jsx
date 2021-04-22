@@ -15,6 +15,7 @@ jest.mock('../service/api');
 
 describe('SignUpContainer', () => {
   const dispatch = jest.fn();
+  const handlePageMove = jest.fn();
 
   beforeEach(() => {
     jest.resetAllMocks();
@@ -25,8 +26,8 @@ describe('SignUpContainer', () => {
         password: PASSWORD,
       },
       signUp: {
-        loading: false,
-        success: false,
+        loading: given.signinLoading || false,
+        success: given.signinSuccess || false,
         failure: given.signinFailure || false,
       },
       isLoggedIn: given.isLoggedIn || false,
@@ -42,7 +43,7 @@ describe('SignUpContainer', () => {
   });
 
   function renderSignUpContainer() {
-    return render(<SignUpContainer />);
+    return render(<SignUpContainer onPageMove={handlePageMove} />);
   }
 
   it('renders Email field', () => {
@@ -107,23 +108,23 @@ describe('SignUpContainer', () => {
     expect(dispatch).toBeCalled();
   });
 
-  context('with sign in error', () => {
+  context('when sign up success', () => {
+    given('signinSuccess', () => true);
+
+    it('routing to "main" page', () => {
+      renderSignUpContainer();
+
+      expect(handlePageMove).toBeCalledWith('/main');
+    });
+  });
+
+  context('when sign up failure', () => {
     given('signinFailure', () => 'ERROR_MESSAGE');
 
     it('renders error messages', () => {
       const { queryByText } = renderSignUpContainer();
 
       expect(queryByText('ERROR_MESSAGE')).not.toBeNull();
-    });
-  });
-
-  context('without sign in error', () => {
-    given('signinFailure', () => false);
-
-    it('renders error messages', () => {
-      const { queryByText } = renderSignUpContainer();
-
-      expect(queryByText('ERROR_MESSAGE')).toBeNull();
     });
   });
 });
