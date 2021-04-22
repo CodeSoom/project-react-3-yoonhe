@@ -90,13 +90,12 @@ const reducers = {
     };
   },
   setSignInRequest(state) {
-    const { signIn } = state;
-
     return {
       ...state,
       signIn: {
-        ...signIn,
         loading: true,
+        success: false,
+        failure: false,
       },
     };
   },
@@ -121,6 +120,7 @@ const reducers = {
       signIn: {
         ...signIn,
         loading: false,
+        success: false,
         failure: errorMessage,
       },
     };
