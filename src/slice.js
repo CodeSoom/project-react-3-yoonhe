@@ -35,7 +35,7 @@ const initialState = {
     email: '',
     password: '',
   },
-  signIn: {
+  signUp: {
     loading: false,
     success: false,
     failure: false,
@@ -89,36 +89,30 @@ const reducers = {
       loginError,
     };
   },
-  setSignInRequest(state) {
+  setSignUpRequest(state) {
     return {
       ...state,
-      signIn: {
+      signUp: {
         loading: true,
         success: false,
         failure: false,
       },
     };
   },
-  setSignInSuccess(state) {
-    const { signIn } = state;
-
+  setSignUpSuccess(state) {
     return {
       ...state,
-      signIn: {
-        ...signIn,
+      signUp: {
         loading: false,
         success: true,
         failure: false,
       },
     };
   },
-  setSignInFailure(state, { payload: errorMessage }) {
-    const { signIn } = state;
-
+  setSignUpFailure(state, { payload: errorMessage }) {
     return {
       ...state,
-      signIn: {
-        ...signIn,
+      signUp: {
         loading: false,
         success: false,
         failure: errorMessage,
@@ -174,9 +168,9 @@ export const {
   changeRoomImages,
   addRoom,
   changeSignInFields,
-  setSignInRequest,
-  setSignInSuccess,
-  setSignInFailure,
+  setSignUpRequest,
+  setSignUpSuccess,
+  setSignUpFailure,
 } = actions;
 
 export function loginRequest() {
@@ -201,14 +195,14 @@ export function loginRequest() {
   };
 }
 
-export function signInRequest() {
+export function signUpRequest() {
   return async (dispatch, getState) => {
     const { signInFields } = getState();
     const { email, password } = signInFields;
-    dispatch(setSignInRequest());
+    dispatch(setSignUpRequest());
     try {
       await postSignup({ email, password });
-      dispatch(setSignInSuccess());
+      dispatch(setSignUpSuccess());
     } catch (error) {
       const errors = {
         'auth/invalid-email': '이메일을 입력해주세요 👀',
@@ -218,7 +212,7 @@ export function signInRequest() {
 
       const { code } = error;
 
-      dispatch(setSignInFailure(errors[code]));
+      dispatch(setSignUpFailure(errors[code]));
     }
   };
 }

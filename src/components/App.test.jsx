@@ -32,7 +32,7 @@ describe('App', () => {
         password: PASSWORD,
       },
       isLoggedIn: given.isLoggedIn || false,
-      signIn: {
+      signUp: {
         loading: false,
         success: false,
         failure: false,

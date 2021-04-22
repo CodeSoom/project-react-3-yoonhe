@@ -21,7 +21,7 @@ describe('SignUpPage', () => {
         email: EMAIL,
         password: PASSWORD,
       },
-      signIn: {
+      signUp: {
         loading: false,
         success: false,
         failure: false,

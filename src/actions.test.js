@@ -7,7 +7,7 @@ import {
   loadRooms,
   initialAddRoomFields,
   requestAddRoom,
-  signInRequest,
+  signUpRequest,
 } from './slice';
 
 import {
@@ -78,7 +78,7 @@ describe('actions', () => {
     });
   });
 
-  describe('signInRequest', () => {
+  describe('signUpRequest', () => {
     beforeEach(() => {
       jest.clearAllMocks();
 
@@ -90,45 +90,45 @@ describe('actions', () => {
       });
     });
 
-    context('when signin success', () => {
+    context('when signUp success', () => {
       beforeEach(() => {
         postSignup.mockResolvedValue();
       });
 
-      it('runs setIsLoggedIn', async () => {
-        await store.dispatch(signInRequest());
+      it('runs setSignUpRequest and setSignUpSuccess', async () => {
+        await store.dispatch(signUpRequest());
 
         const actions = store.getActions();
 
         expect(actions).toEqual([
           {
-            type: 'roomPreviews/setSignInRequest',
+            type: 'roomPreviews/setSignUpRequest',
           },
           {
-            type: 'roomPreviews/setSignInSuccess',
+            type: 'roomPreviews/setSignUpSuccess',
           },
         ]);
       });
     });
 
-    context('when signin failure', () => {
+    context('when signUp failure', () => {
       beforeEach(() => {
         postSignup.mockRejectedValue({
           code: 'auth/email-already-in-use',
         });
       });
 
-      it('runs setIsLoggedIn with false', async () => {
-        await store.dispatch(signInRequest());
+      it('runs setSignUpRequest and setSignUpFailure', async () => {
+        await store.dispatch(signUpRequest());
 
         const actions = store.getActions();
 
         expect(actions).toEqual([
           {
-            type: 'roomPreviews/setSignInRequest',
+            type: 'roomPreviews/setSignUpRequest',
           },
           {
-            type: 'roomPreviews/setSignInFailure',
+            type: 'roomPreviews/setSignUpFailure',
             payload: '이미 사용중인 메일입니다 👀',
           },
         ]);
