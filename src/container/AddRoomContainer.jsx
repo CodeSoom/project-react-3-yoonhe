@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import styled from '@emotion/styled';
+
+import { MdVpnKey } from 'react-icons/md';
+
 import AddRoomScoreControls from '../components/AddRoomScoreControls';
 import AddRoomTextControls from '../components/AddRoomTextControls';
 
@@ -12,8 +16,22 @@ import {
 
 import { get, getUploadImages } from '../../utils';
 
+const LoginRequestMessage = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '100%',
+  h2: {
+    color: '#75A293',
+    marginTop: '1rem',
+  },
+});
+
 export default function AddRoomContainer({ onGoToMain }) {
   const addRoomFields = useSelector(get('addRoomFields'));
+  const isLoggedIn = useSelector(get('isLoggedIn'));
+
   const { images } = addRoomFields;
 
   const dispatch = useDispatch();
@@ -36,6 +54,15 @@ export default function AddRoomContainer({ onGoToMain }) {
     const uploadImages = await getUploadImages(files);
 
     dispatch(changeRoomImages(uploadImages));
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <LoginRequestMessage>
+        <p><MdVpnKey size="50" color="#75A293" /></p>
+        <h2>로그인이 필요한 페이지 입니다</h2>
+      </LoginRequestMessage>
+    );
   }
 
   return (

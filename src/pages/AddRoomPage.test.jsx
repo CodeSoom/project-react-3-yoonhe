@@ -25,6 +25,7 @@ describe('AddRoomPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
+      isLoggedIn: given.isLoggedIn || false,
       addRoomFields: {
         address: '',
         moveInType: '',
@@ -36,21 +37,45 @@ describe('AddRoomPage', () => {
     }));
   });
 
-  it('renders AddRoomPage', () => {
-    const { queryByText } = render((
-      <AddRoomPage />
-    ));
+  context('when logged in', () => {
+    given('isLoggedIn', () => true);
 
-    expect(queryByText('살았던 혹은 살고계신 방을 알려주세요 😊')).not.toBeNull();
+    it('renders AddRoomPage', () => {
+      const { queryByText } = render((
+        <AddRoomPage />
+      ));
+
+      expect(queryByText('살았던 혹은 살고계신 방을 알려주세요 😊')).not.toBeNull();
+    });
+
+    it('routing to "Main" page when "등록하기" button click', () => {
+      const { getByText } = render((
+        <AddRoomPage />
+      ));
+
+      fireEvent.click(getByText('등록하기'));
+
+      expect(mockPush).toBeCalledWith('/main');
+    });
   });
 
-  it('routing to "Main" page when "등록하기" button click', () => {
-    const { getByText } = render((
-      <AddRoomPage />
-    ));
+  context('when logged out', () => {
+    given('isLoggedIn', () => false);
 
-    fireEvent.click(getByText('등록하기'));
+    it('renders AddRoomPage', () => {
+      const { queryByText } = render((
+        <AddRoomPage />
+      ));
 
-    expect(mockPush).toBeCalledWith('/main');
+      expect(queryByText('살았던 혹은 살고계신 방을 알려주세요 😊')).toBeNull();
+    });
+
+    it('routing to "Main" page when "등록하기" button click', () => {
+      const { queryByText } = render((
+        <AddRoomPage />
+      ));
+
+      expect(queryByText('등록하기')).toBeNull();
+    });
   });
 });
