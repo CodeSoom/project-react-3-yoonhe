@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import {
+  Redirect, Route, Switch, useHistory,
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styled from '@emotion/styled';
@@ -98,6 +100,7 @@ const MenuItem = styled.li({
 
 const CenterSection = styled.section({
   padding: '4rem 2rem',
+  height: '100%',
   marginLeft: '250px',
   [mediaQuery[768]]: {
     marginLeft: 'auto',
@@ -129,8 +132,12 @@ export default function App() {
   return (
     <>
       <Switch>
-        <Route exact path="/" component={SignInPage} />
-        <Route exact path="/signUp" component={SignUpPage} />
+        <Route exact path="/">
+          {isLoggedIn ? <Redirect to="/main" /> : <SignInPage />}
+        </Route>
+        <Route exact path="/signUp">
+          {isLoggedIn ? <Redirect to="/main" /> : <SignUpPage />}
+        </Route>
         <>
           <LeftSection visible={menuVisible}>
             <MobileMenuIcon onClick={handleMobileIconClick} visible={menuVisible}>
