@@ -1,5 +1,33 @@
 import React from 'react';
 
+import styeld from '@emotion/styled';
+
+const InputWrap = styeld.p({
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '1em',
+  background: '#fff',
+  '& + &': {
+    marginTop: '1em',
+  },
+  'label + *': {
+    flex: 1,
+    marginLeft: '1em',
+  },
+  input: {
+    textAlign: 'right',
+  },
+  select: {
+    maxWidth: '100px',
+  },
+  textarea: {
+    maxWidth: '300px',
+  },
+  'input + span': {
+    marginLeft: '0.5em',
+  },
+});
+
 export default function TextField({
   label,
   type,
@@ -12,7 +40,7 @@ export default function TextField({
   const isDefaultInput = INPUT_TYPES.includes(type);
 
   return (
-    <p>
+    <InputWrap>
       <label htmlFor={`input-${name}`}>{label}</label>
       {isDefaultInput && (
         <>
@@ -48,6 +76,6 @@ export default function TextField({
         }
       </select>
       )}
-    </p>
+    </InputWrap>
   );
 }
