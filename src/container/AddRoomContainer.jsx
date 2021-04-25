@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 
 import { MdVpnKey } from 'react-icons/md';
 
+import CenterSection from '../styles/CenterSection';
+
 import AddRoomScoreControls from '../components/AddRoomScoreControls';
 import AddRoomTextControls from '../components/AddRoomTextControls';
 import AddRoomImageControls from '../components/AddRoomImageControls';
@@ -85,15 +87,17 @@ export default function AddRoomContainer({ onGoToMain }) {
 
   if (!isLoggedIn) {
     return (
-      <LoginRequestMessage>
-        <p><MdVpnKey size="50" color="#75A293" /></p>
-        <h2>로그인이 필요한 페이지 입니다</h2>
-      </LoginRequestMessage>
+      <CenterSection fullHeight>
+        <LoginRequestMessage>
+          <p><MdVpnKey size="50" color="#75A293" /></p>
+          <h2>로그인이 필요한 페이지 입니다</h2>
+        </LoginRequestMessage>
+      </CenterSection>
     );
   }
 
   return (
-    <div>
+    <CenterSection>
       <Title>살았던 혹은 살고계신 방을 알려주세요 😊</Title>
       <form onSubmit={handleSubmit}>
         <FormWrap>
@@ -107,6 +111,6 @@ export default function AddRoomContainer({ onGoToMain }) {
           <Button type="submit">등록하기</Button>
         </ButtonBox>
       </form>
-    </div>
+    </CenterSection>
   );
 }

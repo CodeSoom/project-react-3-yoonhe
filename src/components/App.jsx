@@ -98,15 +98,6 @@ const MenuItem = styled.li({
   },
 });
 
-const CenterSection = styled.section({
-  padding: '4rem 2rem',
-  marginLeft: '250px',
-  [mediaQuery[768]]: {
-    marginLeft: 'auto',
-    padding: '6rem 1.1rem 2rem',
-  },
-});
-
 export default function App() {
   const history = useHistory();
 
@@ -197,10 +188,8 @@ export default function App() {
               </Menu>
             </LeftSectionWrap>
           </LeftSection>
-          <CenterSection>
-            <Route exact path="/main" component={MianPage} />
-            <Route exact path="/addRoom" component={AddRoomPage} />
-          </CenterSection>
+          <Route exact path="/main" component={MianPage} />
+          <Route exact path="/addRoom" component={AddRoomPage} />
         </>
       </Switch>
     </>

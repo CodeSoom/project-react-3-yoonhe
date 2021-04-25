@@ -6,6 +6,8 @@ import RoomList from '../components/RoomList';
 import { loadRooms } from '../slice';
 import { get } from '../../utils';
 
+import CenterSection from '../styles/CenterSection';
+
 export default function MainContainer() {
   const dispatch = useDispatch();
 
@@ -16,9 +18,9 @@ export default function MainContainer() {
   }, []);
 
   return (
-    <>
+    <CenterSection>
       <h2>방 구경 👀</h2>
       <RoomList rooms={rooms} />
-    </>
+    </CenterSection>
   );
 }
