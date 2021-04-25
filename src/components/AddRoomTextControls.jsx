@@ -13,34 +13,37 @@ export default function AddRoomTextControls({ onChange }) {
     <div>
       <TextField
         label="주소"
-        type="text"
+        type="textarea"
         name="address"
         onChange={handleChange}
-        formType="textarea"
       />
       <TextField
         label="입주 유형"
-        type="text"
+        type="select"
         name="moveInType"
         onChange={handleChange}
+        selectOptions={['전세', '월세']}
       />
       <TextField
         label="보증금"
         type="text"
         name="deposit"
         onChange={handleChange}
+        unit="만원"
       />
       <TextField
         label="월세"
         type="text"
         name="monthlyRent"
         onChange={handleChange}
+        unit="만원"
       />
       <TextField
         label="관리비"
         type="text"
         name="adminCost"
         onChange={handleChange}
+        unit="만원"
       />
     </div>
   );
