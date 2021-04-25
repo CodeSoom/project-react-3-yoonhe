@@ -100,11 +100,10 @@ const MenuItem = styled.li({
 
 const CenterSection = styled.section({
   padding: '4rem 2rem',
-  height: '100%',
   marginLeft: '250px',
   [mediaQuery[768]]: {
     marginLeft: 'auto',
-    padding: '4rem 1.1rem',
+    padding: '6rem 1.1rem 2rem',
   },
 });
 

@@ -26,21 +26,21 @@ export default function AddRoomTextControls({ onChange }) {
       />
       <TextField
         label="보증금"
-        type="text"
+        type="number"
         name="deposit"
         onChange={handleChange}
         unit="만원"
       />
       <TextField
         label="월세"
-        type="text"
+        type="number"
         name="monthlyRent"
         onChange={handleChange}
         unit="만원"
       />
       <TextField
         label="관리비"
-        type="text"
+        type="number"
         name="adminCost"
         onChange={handleChange}
         unit="만원"
