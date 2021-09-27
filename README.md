@@ -1,7 +1,4 @@
 # 룸프리뷰
-## 주소
-https://codesoom.github.io/project-react-3-yoonhe/
-
 ## 무슨 서비스인가요? 
 입주하고싶은 방에 대한 정보가 필요할때 사용합니다.
 더이상 부동산의 거짓말에 속지마세요.
