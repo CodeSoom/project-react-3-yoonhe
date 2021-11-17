@@ -19,3 +19,12 @@
 
 <img src="./src/main.png" width="100%" />
 
+## 실행방법
+### 개발
+```
+npm run dev
+```
+### 빌드
+```
+npm run build
+```
