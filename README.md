@@ -1,6 +1,4 @@
 # 룸프리뷰
-## 주소
-https://codesoom.github.io/project-react-3-yoonhe/
 
 ## 무슨 서비스인가요? 
 입주하고싶은 방에 대한 정보가 필요할때 사용합니다.
@@ -22,3 +20,12 @@ https://codesoom.github.io/project-react-3-yoonhe/
 
 <img src="./src/main.png" width="100%" />
 
+## 실행방법
+### 개발
+```
+npm run dev
+```
+### 빌드
+```
+npm run build
+```
